@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zoho Portfolio Manager</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- D3.js CDN for charting -->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+        <!-- Link to external JavaScript file -->
+        <script src="script.js"></script>
+</head>
+<body class="bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 min-h-screen">
+
+       <!-- Top Navigation Bar -->
+       <nav class="w-full p-3 flex justify-end items-center shadow-lg">
+        <ul class="flex space-x-8">
+            <li>
+                <button class="nav-item active" id="navAccountManagerDashboard" data-target="accountManagerDashboardContent">Account Manager's Dashboard</button>
+            </li>
+            <li>
+                <button class="nav-item" id="navMerchant360" data-target="merchant360Content">Merchant 360</button>
+            </li>
+            <li>
+                <button class="nav-item" id="navQBRDeck" data-target="qbrDeckContent">QBR Deck</button>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Main Content Area Container -->
+    <div class="main-content-container bg-white rounded-b-lg shadow-lg p-6 pt-6">
+
+        <!-- Account Manager's Dashboard Content (Initially visible) -->
+        <div id="accountManagerDashboardContent" class="content-section">
+            <!-- Header section -->
+            <header class="w-full">
+                <!-- Container for Main Heading, Search Bar, and Filters -->
+                <div class="flex justify-between items-center mb-4 px-2 pt-2">
+                    <!-- Left Section: Main Heading with Zoho image -->
+                    <h1 class="text-xl font-extrabold text-gray-800 text-left align-middle-flex">
+                        <img
+                            src="img/Zoho.png"
+                            alt="Zoho Logo"
+                            class="h-8 w-16 rounded-md"
+                            onerror="this.onerror=null;this.src='https://placehold.co/64x32/cccccc/333333?text=Logo';"
+                        >
+                        Zoho Portfolio Manager
+                    </h1>
+
+                    <!-- Right Section: Search Bar and Filters -->
+                    <div class="flex items-center space-x-4">
+                        <!-- Search Bar -->
+                        <div class="relative flex items-center">
+                            <svg class="w-5 h-5 text-gray-400 absolute left-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                            </svg>
+                            <input
+                                type="text"
+                                placeholder="Search customers..."
+                                class="pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent w-64"
+                            >
+                        </div>
+
+                        <!-- Filters Section -->
+                        <div class="flex items-center space-x-3">
+                            <span class="text-gray-600 text-sm font-medium">Filters:</span>
+
+                            <!-- All Segments Dropdown -->
+                            <div class="relative">
+                                <button class="dropdown-button" id="segmentsButton" aria-haspopup="true" aria-expanded="false">
+                                    All Segments
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                    </svg>
+                                </button>
+                                <div id="segmentsDropdown" class="dropdown-menu hidden">
+                                    <div class="checked-option" data-value="all">
+                                        <svg class="check-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                        </svg>
+                                        All Segments
+                                    </div>
+                                    <div data-value="enterprise">Enterprise</div>
+                                    <div data-value="mid-market">Mid-Market</div>
+                                    <div data-value="smb">SMB</div>
+                                </div>
+                            </div>
+
+                            <!-- All Industries Dropdown -->
+                            <div class="relative">
+                                <button class="dropdown-button" id="industriesButton" aria-haspopup="true" aria-expanded="false">
+                                    All Industries
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                    </svg>
+                                </button>
+                                <div id="industriesDropdown" class="dropdown-menu hidden">
+                                    <div class="checked-option" data-value="all">
+                                        <svg class="check-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                        </svg>
+                                        All Industries
+                                    </div>
+                                    <div data-value="e-commerce">E-commerce</div>
+                                    <div data-value="saas">SaaS</div>
+                                    <div data-value="retail">Retail</div>
+                                    <div data-value="healthcare">Healthcare</div>
+                                    <div data-value="education">Education</div>
+                                </div>
+                            </div>
+
+                            <!-- All Health Scores Dropdown -->
+                            <div class="relative">
+                                <button class="dropdown-button" id="healthScoresButton" aria-haspopup="true" aria-expanded="false">
+                                    All Health Scores
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                    </svg>
+                                </button>
+                                <div id="healthScoresDropdown" class="dropdown-menu hidden">
+                                    <div class="checked-option" data-value="all">
+                                        <svg class="check-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                        </svg>
+                                        All Health Scores
+                                    </div>
+                                    <div data-value="excellent">Excellent (80-100)</div>
+                                    <div data-value="good">Good (60-79)</div>
+                                    <div data-value="average">Average (40-59)</div>
+                                    <div data-value="poor">Poor (0-39)</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- User Profile / Account Dropdown - Added id="userDisplayName" to the span-->
+                        <div class="relative ml-4">
+                            <button class="flex items-center space-x-2 text-gray-700 text-base font-medium focus:outline-none" id="userProfileButton" aria-haspopup="true" aria-expanded="false">
+                                <div class="bg-gray-700 text-white font-bold h-8 w-8 flex items-center justify-center rounded-full text-xs">LG</div>
+                                <span id="userDisplayName">Logan</span> <!-- Added id="userDisplayName" -->
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </button>
+                            <div id="userProfileDropdown" class="dropdown-menu hidden">
+                                <div class="checked-option" data-value="Nasreen">
+                                    <svg class="check-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    Logan
+                                </div>
+                                <div data-value="Dhana">Dhana</div>
+                                <div data-value="Srimathi">Srimathi</div>
+                                <div data-value="Roshini">Roshini</div>
+                                <div data-value="Thillai">Thillai</div>
+                                <div data-value="Revathi">Revathi</div>
+                                <div data-value="Deepika">Deepika</div>
+                                <div data-value="Logan">Logan</div>
+                                <div data-value="Foumin">Foumin</div>
+                                <div data-value="Laxman">Laxman</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Subheading "Portfolio Overview" -->
+                <h2 class="text-2xl font-semibold text-gray-800 text-left mb-0 px-2">
+                    Portfolio Overview
+                </h2>
+                <!-- Details section: "50 Customers | Last updated : Today, 10:15 AM" -->
+                <div class="flex items-center text-gray-600 text-sm px-2 mb-0">
+                    <span class="font-medium">50 Customers</span>
+                    <div class="separator"></div>
+                    <span>Last updated : Today, 10:15 AM</span>
+                </div>
+            </header>
+
+            <!-- Cards Container: Uses flexbox for horizontal layout -->
+            <div class="flex flex-wrap lg:flex-nowrap gap-4 p-4">
+                <!-- Card for Total ARR (MTD) -->
+                <div class="w-full lg:w-1/4 bg-white rounded-lg shadow-md p-6 border border-gray-200">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-gray-700 text-base">Total ARR (MTD)</span>
+                        <span class="bg-green-100 text-green-700 text-sm font-medium px-2.5 py-0.5 rounded-full">+12.4%</span>
+                    </div>
+                    <div class="text-3xl font-bold text-gray-900 mb-1">
+                        $42.8M <span class="text-sm text-gray-500 font-normal ml-2">vs $38.1M last month</span>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-1.5 mb-2">
+                        <div class="bg-blue-600 h-1.5 rounded-full" style="width: 85%"></div>
+                    </div>
+                    <div class="flex justify-between text-gray-600 text-sm">
+                        <span>Target : $50M</span>
+                        <span class="font-medium text-blue-600">85% achieved</span>
+                    </div>
+                </div>
+
+                <!-- Card for Active Accounts -->
+                <div class="w-full lg:w-1/4 bg-white rounded-lg shadow-md p-6 border border-gray-200">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-gray-700 text-base">Active Accounts</span>
+                        <span class="bg-green-100 text-green-700 text-sm font-medium px-2.5 py-0.5 rounded-full">+2</span>
+                    </div>
+                    <div class="text-3xl font-bold text-gray-900 mb-1">
+                        46 <span class="text-sm text-gray-500 font-normal ml-2">of 50 total accounts</span>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-1.5 mb-2">
+                        <div class="bg-green-600 h-1.5 rounded-full" style="width: 92%"></div>
+                    </div>
+                    <div class="flex justify-between text-gray-600 text-sm">
+                        <span>Inactive accounts: 4</span>
+                        <span class="font-medium text-green-600">92% active</span>
+                    </div>
+                </div>
+
+                <!-- Card for Product Adoption -->
+                <div class="w-full lg:w-1/4 bg-white rounded-lg shadow-md p-6 border border-gray-200">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-gray-700 text-base">Product Adoption</span>
+                        <span class="bg-blue-100 text-blue-700 text-sm font-medium px-2.5 py-0.5 rounded-full">+5 this month</span>
+                    </div>
+                    <!-- Using grid for 2 columns within Product Adoption card -->
+                    <div class="grid grid-cols-2 gap-x-8 gap-y-4 mt-4">
+                        <!-- CRM row -->
+                        <div class="col-span-1">
+                            <div class="flex items-center justify-between mb-1">
+                                <span>CRM</span>
+                                <span class="text-sm">50/50</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-1.5">
+                                <div class="bg-blue-600 h-1.5 rounded-full" style="width: 100%"></div>
+                            </div>
+                        </div>
+
+                        <!-- Desk row -->
+                        <div class="col-span-1">
+                            <div class="flex items-center justify-between mb-1">
+                                <span>Desk</span>
+                                <span class="text-sm">32/50</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-1.5">
+                                <div class="bg-purple-600 h-1.5 rounded-full" style="width: 64%"></div>
+                            </div>
+                        </div>
+
+                        <!-- Books row -->
+                        <div class="col-span-1">
+                            <div class="flex items-center justify-between mb-1">
+                                <span>Books</span>
+                                <span class="text-sm">18/50</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-1.5">
+                                <div class="bg-orange-600 h-1.5 rounded-full" style="width: 36%"></div>
+                            </div>
+                        </div>
+
+                        <!-- Analytics row -->
+                        <div class="col-span-1">
+                            <div class="flex items-center justify-between mb-1">
+                                <span>Analytics</span>
+                            <span class="text-sm">24/50</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-1.5">
+                                <div class="bg-green-600 h-1.5 rounded-full" style="width: 48%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card for Portfolio Health -->
+                <div class="w-full lg:w-1/4 bg-white rounded-lg shadow-md p-6 border border-gray-200">
+                    <div class="flex justify-between items-center mb-4">
+                        <span class="text-gray-700 text-base">Portfolio Health</span>
+                        <span class="bg-green-100 text-green-700 text-sm font-medium px-2.5 py-0.5 rounded-full">Good</span>
+                    </div>
+                    <div class="flex justify-center mb-4">
+                        <div class="w-24 h-24 bg-gradient-to-br from-blue-500 to-blue-400 rounded-full flex items-center justify-center text-white text-3xl font-bold">
+                            76
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-2 text-center text-gray-900">
+                        <div class="bg-green-50 p-2 rounded-md">
+                            <span class="text-sm">Excellent</span><br>
+                            <span class="font-bold text-lg">18</span>
+                        </div>
+                        <div class="bg-blue-50 p-2 rounded-md">
+                            <span class="text-sm">Good</span><br>
+                            <span class="font-bold text-lg">22</span>
+                        </div>
+                        <div class="bg-yellow-50 p-2 rounded-md">
+                            <span class="text-sm">Average</span><br>
+                            <span class="font-bold text-lg">7</span>
+                        </div>
+                        <div class="bg-red-50 p-2 rounded-md">
+                            <span class="text-sm">Poor</span><br>
+                            <span class="font-bold text-lg">3</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Graphs Container - New flex container for side-by-side graphs -->
+            <div class="flex flex-wrap lg:flex-nowrap gap-4 mt-6 mx-4">
+                <!-- ARR Trend Graph Section -->
+                <div class="w-full lg:w-1/2 bg-white rounded-lg shadow-md p-6 border border-gray-200">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-gray-700 text-base font-semibold">ARR Trend</h3>
+                        <div class="relative">
+                            <button class="dropdown-button" id="timeframeButton" aria-haspopup="true" aria-expanded="false">
+                                Last 6 Months
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </button>
+                            <div id="timeframeDropdown" class="dropdown-menu hidden">
+                                <div class="checked-option" data-value="6months">
+                                    <svg class="check-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    Last 6 Months
+                                </div>
+                                <div data-value="12months">Last 12 Months</div>
+                                <div data-value="3months">Last 3 Months</div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Legend for the graph -->
+                    <div class="flex items-center justify-center space-x-6 mb-4 text-sm text-gray-700">
+                        <div class="flex items-center cursor-pointer" id="arrLegendItem">
+                            <div class="w-4 h-4 bg-blue-600 rounded-sm mr-2"></div>
+                            <span>ARR (in $)</span>
+                        </div>
+                        <div class="flex items-center cursor-pointer" id="targetLegendItem">
+                            <div class="w-4 h-4 border border-dashed border-gray-400 rounded-sm mr-2"></div>
+                            <span>Target</span>
+                        </div>
+                    </div>
+                    <div id="arr-trend-chart" class="w-full overflow-hidden min-h-[350px]">
+                        <!-- D3.js chart will be rendered here -->
+                    </div>
+                </div>
+
+                <!-- GMV by Industry Chart Section - New section for the donut chart -->
+                <div class="w-full lg:w-1/2 bg-white rounded-lg shadow-md p-6 border border-gray-200">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-gray-700 text-base font-semibold">GMV by Industry</h3>
+                        <div class="relative">
+                            <button class="dropdown-button" id="mtdButton" aria-haspopup="true" aria-expanded="false">
+                                MTD
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </button>
+                            <div id="mtdDropdown" class="dropdown-menu hidden">
+                                <div class="checked-option" data-value="mtd">
+                                    <svg class="check-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    MTD
+                                </div>
+                                <div data-value="qtd">QTD</div>
+                                <div data-value="ytd">YTD</div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Legend for the donut chart -->
+                    <div class="grid grid-cols-2 gap-y-2 text-sm text-gray-700 mt-4">
+                        <div class="flex items-center">
+                            <div class="w-4 h-4 bg-indigo-500 rounded-sm mr-2"></div>
+                            <span>E-commerce</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-4 h-4 bg-violet-500 rounded-sm mr-2"></div>
+                            <span>SaaS</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-4 h-4 bg-emerald-400 rounded-sm mr-2"></div>
+                            <span>Education</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-4 h-4 bg-amber-400 rounded-sm mr-2"></div>
+                            <span>Retail</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-4 h-4 bg-red-500 rounded-sm mr-2"></div>
+                            <span>Healthcare</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-4 h-4 bg-gray-500 rounded-sm mr-2"></div>
+                            <span>Food & Beverage</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-4 h-4 bg-gray-300 rounded-sm mr-2"></div>
+                            <span>Others</span>
+                        </div>
+                    </div>
+                    <div id="gmv-by-industry-chart" class="w-full flex justify-center items-center min-h-[300px]">
+                        <!-- D3.js donut chart will be rendered here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Merchant Portfolio Table -->
+            <div class="p-0 mt-6 mx-4">
+                <div class="bg-white rounded-lg shadow-md p-6 border border-gray-200 overflow-x-auto">
+                    <!-- Table Header with Filter and Sort buttons -->
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-lg font-semibold text-gray-800">Merchant Portfolio</h3>
+                        <div class="flex items-center space-x-4">
+                             <!-- Filter button that opens a dynamic modal -->
+                            <div class="relative">
+                                <button class="flex items-center text-gray-600 hover:text-gray-800 text-sm font-medium" id="filterButton">
+                                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"></path></svg>
+                                    Filter
+                                </button>
+                            </div>
+                            <!-- Sort button that opens a dynamic modal -->
+                            <div class="relative">
+                                <button class="flex items-center text-gray-600 hover:text-gray-800 text-sm font-medium" id="sortButton">
+                                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h18M3 8h12M3 12h6m12 0l-4-4m4 4l-4 4m4-4H9"></path></svg>
+                                    Sort
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <table class="min-w-full divide-y divide-gray-200 text-sm">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th scope="col" class="px-4 py-3 text-left font-medium text-gray-500 uppercase tracking-wider">MERCHANT</th>
+                                <th scope="col" class="px-4 py-3 text-left font-medium text-gray-500 uppercase tracking-wider">INDUSTRY</th>
+                                <th scope="col" class="px-4 py-3 text-left font-medium text-gray-500 uppercase tracking-wider">GMV (MTD)</th>
+                                <th scope="col" class="px-4 py-3 text-left font-medium text-gray-500 uppercase tracking-wider">PRODUCTS</th>
+                                <th scope="col" class="px-4 py-3 text-left font-medium text-gray-500 uppercase tracking-wider">HEALTH SCORE</th>
+                                <th scope="col" class="px-4 py-3 text-left font-medium text-gray-500 uppercase tracking-wider">STATUS</th>
+                                <th scope="col" class="px-4 py-3 text-left font-medium text-gray-500 uppercase tracking-wider">LAST INTERACTION</th>
+                                <th scope="col" class="px-4 py-3 text-left font-medium text-gray-500 uppercase tracking-wider">ACTIONS</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200" id="merchant-table-body">
+                            <!-- Table rows will be dynamically generated here -->
+                        </tbody>
+                    </table>
+
+                    <!-- Table Footer with Pagination -->
+                    <div class="flex justify-between items-center mt-4">
+                        <div class="text-sm text-gray-500" id="pagination-info">
+                            <!-- Pagination text will be dynamically updated here -->
+                        </div>
+                        <div class="flex items-center space-x-2" id="pagination-controls">
+                            <!-- Pagination buttons will be dynamically generated here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- New Components: Action Items, Growth Opportunities, At-Risk Merchants -->
+            <div class="flex flex-wrap lg:flex-nowrap gap-4 mt-6 mx-4">
+                <!-- Action Items Component -->
+                <div class="w-full lg:w-1/3 bg-white rounded-lg shadow-md p-6 border border-gray-200">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-lg font-semibold text-gray-800">Action Items</h3>
+                        <span class="bg-red-100 text-red-700 text-sm font-medium px-2.5 py-0.5 rounded-full">3 pending</span>
+                    </div>
+
+                    <!-- Action Item 1 -->
+                    <div class="border-l-4 border-red-500 bg-red-50 p-4 rounded-md mb-4">
+                        <div class="flex items-start">
+                            <svg class="w-5 h-5 text-red-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            <div>
+                                <p class="text-sm font-semibold text-gray-800">Contract Renewal: Fashion Retail Co.</p>
+                                <p class="text-xs text-gray-600">Due in 5 days</p>
+                                <button class="mt-2 px-3 py-1 text-xs font-medium text-red-700 bg-red-200 rounded-md hover:bg-red-300">
+                                    Schedule Call
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Action Item 2 -->
+                    <div class="border-l-4 border-yellow-500 bg-yellow-50 p-4 rounded-md mb-4">
+                        <div class="flex items-start">
+                            <svg class="w-5 h-5 text-yellow-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                            <div>
+                                <p class="text-sm font-semibold text-gray-800">Payment Failures: HealthTech Solutions</p>
+                                <p class="text-xs text-gray-600">3.5% increase in failures</p>
+                                <button class="mt-2 px-3 py-1 text-xs font-medium text-yellow-700 bg-yellow-200 rounded-md hover:bg-yellow-300">
+                                    Investigate
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Action Item 3 -->
+                    <div class="border-l-4 border-blue-500 bg-blue-50 p-4 rounded-md mb-4">
+                        <div class="flex items-start">
+                             <svg class="w-5 h-5 text-blue-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+                            <div>
+                                <p class="text-sm font-semibold text-gray-800">QBR Preparation: Global SaaS Inc.</p>
+                                <p class="text-xs text-gray-600">Scheduled for next week</p>
+                                <button class="mt-2 px-3 py-1 text-xs font-medium text-blue-700 bg-blue-200 rounded-md hover:bg-blue-300">
+                                    Prepare Report
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="#" class="text-sm font-medium text-blue-600 hover:text-blue-800 mt-4 block">View All Action Items</a>
+                </div>
+
+                <!-- Growth Opportunities Component -->
+                <div class="w-full lg:w-1/3 bg-white rounded-lg shadow-md p-6 border border-gray-200">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-lg font-semibold text-gray-800">Growth Opportunities</h3>
+                        <span class="bg-green-100 text-green-700 text-sm font-medium px-2.5 py-0.5 rounded-full">12 identified</span>
+                    </div>
+
+                    <!-- Opportunity 1 -->
+                    <div class="p-4 rounded-md mb-4">
+                        <p class="text-sm font-semibold text-gray-800 mb-1">Neo Banking Upsell</p>
+                        <p class="text-xs text-gray-600 mb-2">18 merchants with high payout volume not using Neo</p>
+                        <div class="w-full bg-gray-200 rounded-full h-2 mb-1">
+                            <div class="bg-green-500 h-2 rounded-full" style="width: 36%"></div>
+                        </div>
+                        <div class="flex justify-between text-xs text-gray-500">
+                            <span>18/50 merchants</span>
+                            <span>₹8.2 Cr opportunity</span>
+                        </div>
+                    </div>
+
+                    <!-- Opportunity 2 -->
+                    <div class="p-4 rounded-md mb-4">
+                        <p class="text-sm font-semibold text-gray-800 mb-1">POS Expansion</p>
+                        <p class="text-xs text-gray-600 mb-2">12 retail merchants without POS solution</p>
+                        <div class="w-full bg-gray-200 rounded-full h-2 mb-1">
+                            <div class="bg-purple-500 h-2 rounded-full" style="width: 24%"></div>
+                        </div>
+                        <div class="flex justify-between text-xs text-gray-500">
+                            <span>12/50 merchants</span>
+                            <span>₹2.9 Cr opportunity</span>
+                        </div>
+                    </div>
+
+                    <!-- Opportunity 3 -->
+                    <div class="p-4 rounded-md mb-4">
+                        <p class="text-sm font-semibold text-gray-800 mb-1">Engage Adoption</p>
+                        <p class="text-xs text-gray-600 mb-2">26 merchants with loyalty program potential</p>
+                        <div class="w-full bg-gray-200 rounded-full h-2 mb-1">
+                            <div class="bg-blue-500 h-2 rounded-full" style="width: 52%"></div>
+                        </div>
+                        <div class="flex justify-between text-xs text-gray-500">
+                            <span>26/50 merchants</span>
+                            <span>₹3.6 Cr opportunity</span>
+                        </div>
+                    </div>
+
+                    <a href="#" class="text-sm font-medium text-blue-600 hover:text-blue-800 mt-4 block">View All Opportunities</a>
+                </div>
+
+                <!-- At-Risk Merchants Component -->
+                <div class="w-full lg:w-1/3 bg-white rounded-lg shadow-md p-6 border border-gray-200">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-lg font-semibold text-gray-800">At-Risk Merchants</h3>
+                        <span class="bg-red-100 text-red-700 text-sm font-medium px-2.5 py-0.5 rounded-full">4 merchants</span>
+                    </div>
+
+                    <!-- Merchant 1 -->
+                    <div class="p-4 rounded-md mb-4 border border-gray-200">
+                        <div class="flex justify-between items-center mb-2">
+                            <div class="flex items-center">
+                                <div class="bg-red-100 text-red-800 font-bold h-8 w-8 flex items-center justify-center rounded-full text-xs mr-3">FR</div>
+                                <div>
+                                    <p class="text-sm font-semibold text-gray-800">Fashion Retail Co.</p>
+                                    <div class="flex items-center text-xs">
+                                        <span class="text-red-600">-3.5% GMV</span>
+                                        <span class="mx-2 text-gray-400">•</span>
+                                        <span class="text-yellow-600">Health: 58</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="w-6 h-6 flex items-center justify-center rounded-full bg-yellow-500 text-white text-xs font-bold">58</div>
+                        </div>
+                        <p class="text-xs font-semibold text-gray-700 mt-2">Risk Factors:</p>
+                        <ul class="list-disc list-inside text-xs text-gray-600 ml-2 mt-1">
+                            <li>Declining GMV for 2 consecutive months</li>
+                            <li>3 open support tickets</li>
+                        </ul>
+                        <button class="mt-4 w-full px-4 py-2 bg-red-500 text-white font-medium rounded-md hover:bg-red-600">
+                            Schedule Intervention
+                        </button>
+                    </div>
+
+                    <!-- Merchant 2 -->
+                    <div class="p-4 rounded-md mb-4 border border-gray-200">
+                        <div class="flex justify-between items-center mb-2">
+                            <div class="flex items-center">
+                                <div class="bg-gray-100 text-gray-800 font-bold h-8 w-8 flex items-center justify-center rounded-full text-xs mr-3">FD</div>
+                                <div>
+                                    <p class="text-sm font-semibold text-gray-800">Food Delivery Pro</p>
+                                    <div class="flex items-center text-xs">
+                                        <span class="text-red-600">-1.8% GMV</span>
+                                        <span class="mx-2 text-gray-400">•</span>
+                                        <span class="text-red-600">Health: 34</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="w-6 h-6 flex items-center justify-center rounded-full bg-red-500 text-white text-xs font-bold">34</div>
+                        </div>
+                        <p class="text-xs font-semibold text-gray-700 mt-2">Risk Factors:</p>
+                        <ul class="list-disc list-inside text-xs text-gray-600 ml-2 mt-1">
+                            <li>No activity for 21 days</li>
+                            <li>High payment failure rate</li>
+                        </ul>
+                        <button class="mt-4 w-full px-4 py-2 bg-red-500 text-white font-medium rounded-md hover:bg-red-600">
+                            Schedule Intervention
+                        </button>
+                    </div>
+
+                    <a href="#" class="text-sm font-medium text-blue-600 hover:text-blue-800 mt-4 block">View All At-Risk Merchants</a>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Merchant 360 Content (Hidden by default) -->
+        <div id="merchant360Content" class="content-section hidden">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">Merchant 360</h2>
+            <p class="text-gray-600">This section is for detailed information on individual merchants. You can add data tables, customer health metrics, recent activity logs, and a history of interactions here.</p>
+        </div>
+
+        <!-- QBR Deck Content (Hidden by default) -->
+        <div id="qbrDeckContent" class="content-section hidden">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">QBR Deck</h2>
+            <p class="text-gray-600">This section can contain content for your Quarterly Business Reviews. Consider including executive summaries, performance trends, key metrics, and strategic recommendations for your clients.</p>
+        </div>
+    </div> <!-- End of main-content-container -->
+
+    <!-- Dynamic Filter Modal -->
+    <div id="filterModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full hidden z-50">
+        <div class="relative top-20 mx-auto p-5 border w-full max-w-xl shadow-lg rounded-md bg-white">
+            <div class="mt-3 text-left">
+                <h3 class="text-lg leading-6 font-medium text-gray-900">Apply Filters</h3>
+                <p class="text-sm text-gray-500 mt-1">Add one or more conditions to filter the merchant table.</p>
+                <div id="filter-conditions-container" class="mt-4 space-y-4">
+                    <!-- Filter conditions will be dynamically added here -->
+                </div>
+                <button id="addFilterConditionBtn" class="mt-4 px-4 py-2 bg-gray-100 text-gray-800 text-sm font-medium rounded-md w-full shadow-sm hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-400">
+                    + Add another filter
+                </button>
+                <div class="mt-6 flex justify-end items-center">
+                    <button id="clearAllFiltersBtn" class="mr-4 px-4 py-2 bg-gray-200 text-gray-800 text-base font-medium rounded-md shadow-sm hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400">
+                        Clear All
+                    </button>
+                    <button id="applyFilterBtn" class="px-4 py-2 bg-blue-500 text-white text-base font-medium rounded-md shadow-sm hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        Apply Filters
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dynamic Sort Modal -->
+    <div id="sortModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full hidden z-50">
+        <div class="relative top-20 mx-auto p-5 border w-full max-w-lg shadow-lg rounded-md bg-white">
+            <div class="mt-3 text-left">
+                <h3 class="text-lg leading-6 font-medium text-gray-900">Sort Table</h3>
+                <p class="text-sm text-gray-500 mt-1">Select a column and a direction to sort the merchant table.</p>
+                <div class="mt-4 space-y-4">
+                    <!-- Column selection -->
+                    <div class="flex items-center space-x-2">
+                        <label for="sort-column-select" class="w-1/3 text-sm font-medium text-gray-700">Column</label>
+                        <select id="sort-column-select" class="block w-2/3 pl-3 pr-10 py-2 text-sm border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 rounded-md">
+                            <!-- Options will be dynamically populated -->
+                        </select>
+                    </div>
+                    <!-- Direction selection -->
+                    <div class="flex items-center space-x-2">
+                        <label class="w-1/3 text-sm font-medium text-gray-700">Direction</label>
+                        <div class="flex w-2/3 space-x-2">
+                            <button id="sort-asc-btn" class="flex-1 px-4 py-2 bg-gray-100 text-gray-800 text-sm font-medium rounded-md shadow-sm hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-400 transition-colors duration-150">
+                                <svg class="w-4 h-4 inline-block mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h9m5-4a2 2 0 11-4 0 2 2 0 014 0zm0 0v-1m0 1l-1 1M18 10v4M15 12h6m-3-3v6"></path></svg>
+                                Ascending
+                            </button>
+                            <button id="sort-desc-btn" class="flex-1 px-4 py-2 bg-gray-100 text-gray-800 text-sm font-medium rounded-md shadow-sm hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-400 transition-colors duration-150">
+                                <svg class="w-4 h-4 inline-block mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h9m5-4a2 2 0 11-4 0 2 2 0 014 0zm0 0v-1m0 1l-1 1M18 10v4M15 12h6m-3-3v6"></path></svg>
+                                Descending
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-6 flex justify-end items-center">
+                    <button id="clear-sort-btn" class="mr-4 px-4 py-2 bg-gray-200 text-gray-800 text-base font-medium rounded-md shadow-sm hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400">
+                        Clear Sort
+                    </button>
+                    <button id="apply-sort-btn" class="px-4 py-2 bg-blue-500 text-white text-base font-medium rounded-md shadow-sm hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        Apply Sort
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+</html>

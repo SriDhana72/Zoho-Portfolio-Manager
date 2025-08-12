@@ -1,0 +1,315 @@
+body {
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #f0f4f8; /* Light background */
+    min-height: 100vh;
+}
+
+/* Main wrapper for the newsletter style content */
+.main-page-wrapper {
+    max-width: 900px; /* Reduced overall width for newsletter style */
+    margin: 2rem auto; /* Center the content on the page with vertical margin */
+    padding: 1.5rem; /* Padding inside the main wrapper */
+    background-color: #ffffff; /* White background for the main content area */
+    border-radius: 12px;
+    box-shadow: 0 4px 25px rgba(0, 0, 0, 0.08); /* A subtle shadow for the main page */
+}
+
+/* Header section containing company name and QBR details */
+.header-section {
+    display: flex; /* Use flexbox to align items horizontally */
+    justify-content: space-between; /* Pushes items to opposite ends */
+    align-items: flex-start; /* Aligns items to the top if heights differ */
+    margin-bottom: 2rem; /* Space below the header section */
+}
+
+/* Custom styling for the account name (left top) */
+.account-name-left {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #1a237e;
+    text-align: left;
+}
+/* Custom styling for the QBR container (right top) */
+.qbr-container-right {
+    text-align: right;
+}
+/* Styling for the QBR heading */
+.qbr-heading {
+    font-size: 0.875rem;
+    font-weight: 400;
+    color: #94a3b8;
+    margin-bottom: 0.25rem;
+}
+/* Styling for the QBR sub-text (Q2 2025) */
+.qbr-subtext {
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: #1a237e;
+}
+/* Styling for the new account details box */
+.account-details-box {
+    background-color: rgba(255, 255, 255, 0.5); /* More faded white background */
+    border-radius: 12px;
+    padding: 1.5rem; /* Reduced padding */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); /* Slightly less prominent shadow */
+    margin-bottom: 2rem; /* Space below the details box */
+    width: 100%; /* Take full width of its parent wrapper */
+    max-width: none; /* Remove previous max-width as it's now constrained by parent */
+    text-align: left; /* Align content inside to the left */
+    font-size: 1rem; /* Base font size for the box */
+    font-weight: 500;
+    color: #334155; /* Base color for the box */
+}
+.account-details-box .header-row {
+    display: flex; /* Use flexbox for horizontal alignment */
+    justify-content: space-between; /* Pushes items to ends */
+    align-items: flex-start; /* Aligns items to the top if they have different heights */
+    margin-bottom: 0.5rem; /* Reduced margin for tighter spacing */
+}
+.account-details-box .left-details {
+    display: flex;
+    flex-direction: column; /* Stack details vertically on the left */
+}
+.account-details-box .left-details > div {
+    margin-bottom: 0.25rem; /* Small spacing between left-aligned details */
+}
+
+/* Styling for labels (e.g., "Merchant Account:", "MID:", "Business Category:") */
+.account-details-box .label {
+    font-weight: 600; /* Bold label */
+    color: #1e293b; /* Darker blue color for labels */
+}
+
+/* Styling for the Merchant Account line */
+.account-details-box .merchant-account-line {
+    font-size: 1.125rem; /* Increased font size (text-lg equivalent) for the entire line */
+}
+/* Styling for the actual "Global Innovations Pvt. Ltd" text */
+.account-details-box .merchant-account-value {
+    color: #1a237e; /* Navy blue color for the account name value */
+    font-weight: 500; /* Regular weight for the value */
+}
+
+/* Styling for MID and Business Category lines (light color, not bold) */
+.account-details-box .light-detail-line {
+    font-size: 1rem; /* Default size */
+    font-weight: 500; /* Not bold */
+    color: #94a3b8; /* Light "blurred" grey/blue color */
+}
+.account-details-box .light-detail-line .label {
+    font-weight: 500; /* Not bold for label within light line */
+    color: #94a3b8; /* Light color for label within light line */
+}
+
+
+.account-details-box .report-period,
+.account-details-box .generated-on { /* Apply similar styles to both date fields */
+    font-size: 0.9rem; /* Slightly smaller for secondary detail */
+    color: #64748b; /* Medium grey for a subtle look */
+    font-weight: 500;
+    text-align: right; /* Ensure it's aligned right */
+}
+.account-details-box .generated-on {
+    margin-top: 0.25rem; /* Small margin between report period and generated on */
+}
+
+/* Styling for the new Executive Summary heading */
+.executive-summary-heading {
+    text-align: left; /* Align to the left */
+    font-size: 1.75rem; /* Equivalent to text-3xl for prominence */
+    font-weight: 700; /* Bold */
+    color: #1a237e; /* Navy blue color */
+    margin-top: 1rem; /* Space from the box above */
+    margin-bottom: 0.75rem; /* Space below the heading, adjusted for the paragraph */
+}
+
+/* Styling for the Executive Summary paragraph */
+.executive-summary-content {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #334155; /* Dark grey for readability */
+    margin-bottom: 1.5rem; /* Space below the paragraph */
+}
+
+/* Styling for the metrics cards container */
+.metrics-cards-container {
+    display: flex;
+    flex-wrap: nowrap; /* Prevent cards from wrapping to the next line */
+    justify-content: space-between; /* Distribute space between cards */
+    gap: 1rem; /* Reduced gap between cards */
+    margin-top: 2rem; /* Space from the executive summary */
+    overflow-x: auto; /* Add horizontal scroll if content overflows */
+    padding-bottom: 0.5rem; /* Add padding for scrollbar if it appears */
+}
+
+/* Styling for individual metric cards */
+.metric-card {
+    background-color: #f8fafc; /* Very light blue background, similar to image */
+    border-radius: 8px;
+    padding: 1rem; /* Reduced padding */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04); /* Slightly less prominent shadow */
+    flex: 0 0 calc(33.333% - 0.66rem); /* Adjusted fixed width for 3 cards per row with reduced gap */
+    min-width: 200px; /* Further reduced minimum width */
+    text-align: center; /* Centered content horizontally */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centered content vertically */
+    align-items: center; /* Centered content horizontally for single lines */
+}
+
+.metric-card .title {
+    font-size: 0.9rem; /* Reduced font size */
+    font-weight: 500;
+    color: #475569; /* Slate-600 */
+    margin-bottom: 0.5rem; /* Reduced margin */
+}
+
+.metric-card .value {
+    font-size: 1.875rem; /* text-3xl, reduced from 4xl */
+    font-weight: 700;
+    color: #1a237e; /* Navy blue */
+    margin-bottom: 0.25rem; /* Reduced margin */
+}
+
+.metric-card .change {
+    font-size: 0.8rem; /* Further reduced font size */
+    font-weight: 500;
+    color: #16a34a; /* Green for positive change (emerald-600) */
+    line-height: 1.2; /* Reduced line height for tighter spacing */
+}
+
+/* Styling for the new Payment Performance heading */
+.payment-performance-heading {
+    text-align: left; /* Align to the left */
+    font-size: 1.75rem; /* Equivalent to text-3xl for prominence */
+    font-weight: 700; /* Bold */
+    color: #1a237e; /* Navy blue color */
+    margin-top: 2rem; /* Space from the cards above */
+    margin-bottom: 1rem; /* Space below the heading */
+}
+
+/* Container for the two new payment performance components */
+.payment-performance-components {
+    display: flex;
+    flex-wrap: wrap; /* Allow components to wrap on smaller screens */
+    justify-content: space-between; /* Distribute space between components */
+    gap: 1.5rem; /* Gap between the two components */
+    margin-top: 1rem; /* Space below the Payment Performance heading */
+    margin-bottom: 2rem; /* Space below these components */
+}
+
+/* Base style for the new component cards */
+.performance-card {
+    background-color: #f8fafc; /* Very light blue background */
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    flex: 1 1 calc(50% - 0.75rem); /* Two cards per row with a gap */
+    min-width: 300px; /* Minimum width before wrapping */
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Push title to top, content to bottom */
+}
+
+.performance-card .card-title {
+    font-size: 1.125rem; /* text-lg */
+    font-weight: 600;
+    color: #000000; /* Changed to black */
+    margin-bottom: auto; /* Push content below to the bottom */
+}
+
+/* Monthly Transaction Volume Specific Styles */
+.monthly-volume-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columns for months */
+    gap: 0.5rem;
+    text-align: center;
+    margin-top: 1rem; /* Added margin to push it down from the title */
+}
+.monthly-volume-grid .month {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #475569; /* Slate-600 */
+}
+.monthly-volume-grid .volume {
+    font-size: 1.125rem; /* text-lg */
+    font-weight: 600;
+    color: #1a237e; /* Navy blue */
+}
+
+/* Payment Method Distribution Specific Styles */
+.payment-method-item {
+    display: flex;
+    flex-direction: column; /* Stack label/percentage row above progress bar */
+    margin-bottom: 0.75rem; /* Space between each method */
+}
+.payment-method-item .label-percentage-row {
+    display: flex;
+    justify-content: space-between; /* Push label left, percentage right */
+    align-items: center;
+    margin-bottom: 0.25rem; /* Small space between labels/percentage and bar */
+}
+.payment-method-item .method-name {
+    font-size: 0.95rem;
+    color: #334155;
+    font-weight: 500;
+}
+.payment-method-item .percentage {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #1a237e;
+}
+.payment-method-item .progress-bar-container {
+    width: 100%; /* Take full available width */
+    height: 6px;
+    background-color: #e2e8f0; /* Gray-200 */
+    border-radius: 3px;
+    overflow: hidden;
+    /* Removed margin-left as it's no longer next to method name */
+}
+.payment-method-item .progress-bar {
+    height: 100%;
+    border-radius: 3px;
+}
+/* Specific colors for progress bars based on image */
+.progress-bar.green { background-color: #22c55e; } /* Emerald-500 */
+.progress-bar.blue { background-color: #3b82f6; }  /* Blue-500 */
+.progress-bar.purple { background-color: #a855f7; } /* Violet-500 */
+.progress-bar.yellow { background-color: #eab308; } /* Amber-500 */
+.progress-bar.red { background-color: #ef4444; }    /* Red-500 */
+
+/* Key Performance Insights Card */
+.key-performance-card {
+    background-color: rgba(248, 250, 252, 0.7); /* Milder background color */
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    margin-top: 2rem; /* Space from the components above */
+    width: 100%; /* Take full width of the wrapper */
+    text-align: left;
+}
+
+.key-performance-card .card-title {
+    font-size: 1.125rem; /* text-lg */
+    font-weight: 600;
+    color: #1a237e; /* Navy blue */
+    margin-bottom: 1rem;
+}
+
+.key-performance-card ul {
+    list-style: disc; /* Bullet points */
+    padding-left: 1.25rem; /* Indent for bullet points */
+    margin-top: 0;
+    margin-bottom: 0;
+    color: #334155; /* Dark grey for list items */
+}
+
+.key-performance-card ul li {
+    font-size: 0.95rem;
+    line-height: 1.4; /* Reduced line height for tighter spacing */
+    margin-bottom: 0.25rem; /* Reduced space between list items */
+}
