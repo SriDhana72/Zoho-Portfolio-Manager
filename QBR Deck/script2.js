@@ -1,21 +1,64 @@
-// You can add your JavaScript logic here
-// Example: A simple alert when the button is clicked (using a custom modal for better UX)
-function showAlert(message) {
-    const container = document.querySelector('.main-page-wrapper'); // Target the main wrapper or body
-    const alertBox = document.createElement('div');
-    alertBox.className = 'fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center z-50';
-    alertBox.innerHTML = `
-        <div class="bg-white p-6 rounded-lg shadow-xl max-w-sm w-full text-center">
-            <p class="text-xl font-semibold mb-4 text-gray-800">${message}</p>
-            <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
-                    onclick="this.closest('.fixed').remove()">
-                OK
-            </button>
-        </div>
-    `;
-    document.body.appendChild(alertBox);
-}
+document.addEventListener('DOMContentLoaded', () => {
+    // Function to wrap text content for word-by-word animation
+    const wrapWords = (element) => {
+        const initialTextSpan = element.querySelector('.initial-text');
+        if (!initialTextSpan) return; // Only process if .initial-text exists
 
-// Example of how you might attach an event listener if there was a button in script2.js
-// If you add a button to your HTML that needs this function, make sure its onclick calls showAlert
-// For instance: <button onclick="showAlert('Your custom message!')">Show Alert</button>
+        const text = initialTextSpan.innerHTML;
+        let wrappedText = '';
+        // Split by space, but keep HTML tags intact for strong elements etc.
+        const parts = text.split(/(<[^>]+>|\s+)/);
+
+        parts.forEach((part) => {
+            if (part.startsWith('<') && part.endsWith('>')) {
+                // It's an HTML tag, add it directly without wrapping
+                wrappedText += part;
+            } else if (part.trim() === '') {
+                // It's just whitespace, add it directly
+                wrappedText += part;
+            } else {
+                // It's a word, wrap it in a span
+                wrappedText += `<span style="opacity:0;">${part}</span>`;
+            }
+        });
+        element.innerHTML = wrappedText;
+    };
+
+    // Function to animate words one by one
+    const animateWords = (element) => {
+        const words = element.querySelectorAll('span');
+        words.forEach((word, index) => {
+            setTimeout(() => {
+                word.style.opacity = '1';
+            }, index * 20); // Even faster delay (20ms per word)
+        });
+    };
+
+    // Setup Intersection Observer
+    const observerOptions = {
+        root: null, // viewport
+        rootMargin: '0px',
+        threshold: 0.1 // Trigger when 10% of the element is visible
+    };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                // For word-by-word paragraphs
+                if (entry.target.classList.contains('word-by-word')) {
+                    animateWords(entry.target);
+                }
+                // Stop observing once animated
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    // Prepare word-by-word elements BEFORE observing them
+    const wordByWordTargets = document.querySelectorAll('.word-by-word');
+    wordByWordTargets.forEach(target => {
+        wrapWords(target);
+        // Observe these elements
+        observer.observe(target);
+    });
+});
