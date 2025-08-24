@@ -1,0 +1,975 @@
+body {
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #f0f4f8; /* Light background */
+    min-height: 100vh;
+}
+
+/* Main wrapper for the newsletter style content */
+.main-page-wrapper, .second-page-wrapper, .third-page-wrapper { /* Apply to all page wrappers */
+    max-width: 740px; /* Reduced overall width */
+    margin: 1.5rem auto; /* Center the content on the page with vertical margin */
+    padding: 1.8rem; /* Reduced padding inside the main wrapper */
+    background-color: #ffffff; /* White background for the main content area */
+    border-radius: 10px; /* Slightly less rounded */
+    box-shadow: 0 3px 20px rgba(0, 0, 0, 0.07); /* Slightly softer shadow */
+}
+
+/* Header section containing company name and QBR details */
+.header-section {
+    display: flex; /* Use flexbox to align items horizontally */
+    justify-content: space-between; /* Pushes items to opposite ends */
+    align-items: flex-start; /* Aligns items to the top if heights differ */
+    margin-bottom: 1.2rem; /* Reduced space below the header section */
+}
+
+/* Custom styling for the account name (left top) */
+.account-name-left {
+    font-size: 1.1rem; /* Reduced font size */
+    font-weight: 700;
+    color: #1a237e;
+    text-align: left;
+}
+/* Custom styling for the QBR container (right top) */
+.qbr-container-right {
+    text-align: right;
+}
+/* Styling for the QBR heading */
+.qbr-heading {
+    font-size: 0.8rem; /* Reduced font size */
+    font-weight: 400;
+    color: #94a3b8;
+    margin-bottom: 0.15rem; /* Reduced margin */
+}
+/* Styling for the QBR sub-text (Q2 2025) */
+.qbr-subtext {
+    font-size: 0.8rem; /* Reduced font size */
+    font-weight: 700;
+    color: #1a237e;
+}
+/* Styling for the new account details box */
+.account-details-box {
+    background-color: rgba(255, 255, 255, 0.5); /* More faded white background */
+    border-radius: 10px; /* Slightly less rounded */
+    padding: 1rem; /* Reduced padding */
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.04); /* Slightly softer shadow */
+    margin-bottom: 1.5rem; /* Reduced space below the details box */
+    width: 100%; /* Take full width of its parent wrapper */
+    max-width: none; /* Remove previous max-width as it's now constrained by parent */
+    text-align: left; /* Align content inside to the left */
+    font-size: 0.9rem; /* Reduced base font size for the box */
+    font-weight: 500;
+    color: #334155; /* Base color for the box */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Added transition for hover effect */
+}
+.account-details-box:hover {
+    transform: translateY(-3px); /* Smaller lift effect on hover */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08); /* Stronger shadow on hover */
+}
+.account-details-box .header-row {
+    display: flex; /* Use flexbox for horizontal alignment */
+    justify-content: space-between; /* Pushes items to ends */
+    align-items: flex-start; /* Aligns items to the top if they have different heights */
+    margin-bottom: 0.3rem; /* Reduced margin for tighter spacing */
+}
+.account-details-box .left-details {
+    display: flex;
+    flex-direction: column; /* Stack details vertically on the left */
+}
+.account-details-box .left-details > div {
+    margin-bottom: 0.15rem; /* Small spacing between left-aligned details */
+}
+
+/* Styling for labels (e.g., "Merchant Account:", "MID:", "Business Category:") */
+.account-details-box .label {
+    font-weight: 600; /* Bold label */
+    color: #1e293b; /* Darker blue color for labels */
+}
+
+/* Styling for the Merchant Account line */
+.account-details-box .merchant-account-line {
+    font-size: 1rem; /* Reduced font size */
+}
+/* Styling for the actual "Global Innovations Pvt. Ltd" text */
+.account-details-box .merchant-account-value {
+    color: #1a237e; /* Navy blue color for the account name value */
+    font-weight: 500; /* Regular weight for the value */
+}
+
+/* Styling for MID and Business Category lines (light color, not bold) */
+.account-details-box .light-detail-line {
+    font-size: 0.85rem; /* Reduced size */
+    font-weight: 500; /* Not bold */
+    color: #94a3b8; /* Light "blurred" grey/blue color */
+}
+.account-details-box .light-detail-line .label {
+    font-weight: 500; /* Not bold for label within light line */
+    color: #94a3b8; /* Light color for label within light line */
+}
+
+
+.account-details-box .report-period,
+.account-details-box .generated-on { /* Apply similar styles to both date fields */
+    font-size: 0.75rem; /* Reduced for secondary detail */
+    color: #64748b; /* Medium grey for a subtle look */
+    font-weight: 500;
+    text-align: right; /* Ensure it's aligned right */
+}
+.account-details-box .generated-on {
+    margin-top: 0.15rem;
+}
+
+/* Styling for the new Executive Summary heading */
+.executive-summary-heading {
+    text-align: left; /* Align to the left */
+    font-size: 1.4rem; /* Reduced font size */
+    font-weight: 700; /* Bold */
+    color: #1a237e; /* Navy blue color */
+    margin-top: 0.7rem; /* Space from the box above */
+    margin-bottom: 0.5rem; /* Space below the heading, adjusted for the paragraph */
+}
+
+/* Styling for the Executive Summary paragraph */
+.executive-summary-content {
+    font-size: 0.9rem; /* Reduced font size */
+    line-height: 1.4; /* Slightly reduced line height */
+    color: #334155; /* Dark grey for readability */
+    margin-bottom: 1rem; /* Reduced space below the paragraph */
+}
+
+/* Word-by-word animation styles */
+.word-by-word span {
+    opacity: 0;
+    display: inline-block; /* Essential for proper spacing of words with opacity transition */
+    transition: opacity 0.04s ease-out; /* Slightly faster transition */
+}
+
+
+/* Styling for the metrics cards container */
+.metrics-cards-container {
+    display: flex;
+    flex-wrap: nowrap; /* Prevent cards from wrapping to the next line */
+    justify-content: space-between; /* Distribute space between cards */
+    gap: 0.7rem; /* Reduced gap between cards */
+    margin-top: 1.5rem; /* Reduced space from the executive summary */
+    overflow-x: auto; /* Add horizontal scroll if content overflows */
+    padding-bottom: 0.3rem; /* Add padding for scrollbar if it appears */
+}
+
+/* Styling for individual metric cards */
+.metric-card {
+    background-color: #f8fafc; /* Very light blue background, similar to image */
+    border-radius: 7px; /* Slightly less rounded */
+    padding: 0.7rem; /* Reduced padding */
+    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.07); /* Added subtle shadow */
+    flex: 0 0 calc(33.333% - 0.46rem); /* Adjusted fixed width for 3 cards per row with reduced gap */
+    min-width: 170px; /* Further reduced minimum width */
+    text-align: center; /* Centered content horizontally */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centered content vertically */
+    align-items: center; /* Centered content horizontally for single lines */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Added transition for hover effect */
+}
+.metric-card:hover {
+    transform: translateY(-3px); /* Smaller lift effect on hover */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1); /* Stronger shadow on hover */
+}
+
+.metric-card .title {
+    font-size: 0.8rem; /* Reduced font size */
+    font-weight: 500;
+    color: #475569; /* Slate-600 */
+    margin-bottom: 0.3rem;
+}
+
+.metric-card .value {
+    font-size: 1.5rem; /* Reduced from text-3xl */
+    font-weight: 700;
+    color: #1a237e; /* Navy blue */
+    margin-bottom: 0.15rem;
+}
+
+.metric-card .change {
+    font-size: 0.7rem; /* Further reduced font size */
+    font-weight: 500;
+    color: #16a34a; /* Green for positive change (emerald-600) */
+    line-height: 1;
+}
+
+/* Styling for the new Payment Performance heading */
+.payment-performance-heading {
+    text-align: left; /* Align to the left */
+    font-size: 1.4rem; /* Reduced font size */
+    font-weight: 700;
+    color: #1a237e; /* Navy blue color */
+    margin-top: 1.5rem; /* Space from the cards above */
+    margin-bottom: 0.7rem;
+}
+
+/* Container for the two new payment performance components */
+.payment-performance-components {
+    display: flex;
+    flex-wrap: wrap; /* Allow components to wrap on smaller screens */
+    justify-content: space-between; /* Distribute space between components */
+    gap: 1rem; /* Reduced gap between the two components */
+    margin-top: 0.7rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Base style for the new component cards */
+.performance-card {
+    background-color: #f8fafc; /* Very light blue background */
+    border-radius: 7px; /* Slightly less rounded */
+    padding: 1rem; /* Reduced padding */
+    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.07); /* Added subtle shadow */
+    flex: 1 1 calc(50% - 0.5rem); /* Two cards per row with a reduced gap */
+    min-width: 270px; /* Slightly reduced minimum width */
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Added transition for hover effect */
+}
+.performance-card:hover {
+    transform: translateY(-3px); /* Smaller lift effect on hover */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1); /* Stronger shadow on hover */
+}
+
+.performance-card .card-title {
+    font-size: 0.95rem; /* Reduced font size */
+    font-weight: 600;
+    color: #000000; /* Changed to black */
+    margin-bottom: auto;
+}
+
+/* Monthly Transaction Volume Specific Styles */
+.monthly-volume-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columns for months */
+    gap: 0.3rem;
+    text-align: center;
+    margin-top: 0.7rem;
+}
+.monthly-volume-grid .month {
+    font-size: 0.8rem; /* Reduced font size */
+    font-weight: 500;
+    color: #475569;
+}
+.monthly-volume-grid .volume {
+    font-size: 0.95rem; /* Reduced font size */
+    font-weight: 600;
+    color: #1a237e;
+}
+
+/* Payment Method Distribution Specific Styles */
+.payment-method-item {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0.5rem; /* Reduced margin */
+}
+.payment-method-item .label-percentage-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.15rem; /* Reduced margin */
+}
+.payment-method-item .method-name {
+    font-size: 0.85rem; /* Reduced font size */
+    color: #334155;
+    font-weight: 500;
+}
+.payment-method-item .percentage {
+    font-size: 0.85rem; /* Reduced font size */
+    font-weight: 600;
+    color: #1a237e;
+}
+.payment-method-item .progress-bar-container {
+    width: 100%;
+    height: 4px; /* Reduced height */
+    background-color: #e2e8f0;
+    border-radius: 2px; /* Slightly less rounded */
+    overflow: hidden;
+}
+.payment-method-item .progress-bar {
+    height: 100%;
+    border-radius: 2px; /* Slightly less rounded */
+}
+/* Specific colors for progress bars based on image */
+.progress-bar.green { background-color: #22c55e; }
+.progress-bar.blue { background-color: #3b82f6; }
+.progress-bar.purple { background-color: #a855f7; }
+.progress-bar.yellow { background-color: #eab308; }
+.progress-bar.red { background-color: #ef4444; }
+
+/* Key Performance Insights Card */
+.key-performance-card {
+    background-color: rgba(248, 250, 252, 0.7); /* Milder background color */
+    border-radius: 7px; /* Slightly less rounded */
+    padding: 1rem; /* Reduced padding */
+    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.07); /* Added subtle shadow */
+    margin-top: 1.5rem;
+    width: 100%;
+    text-align: left;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Added transition for hover effect */
+}
+.key-performance-card:hover {
+    transform: translateY(-3px); /* Smaller lift effect on hover */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1); /* Stronger shadow on hover */
+}
+
+.key-performance-card .card-title {
+    font-size: 0.95rem; /* Reduced font size */
+    font-weight: 600;
+    color: #1a237e;
+    margin-bottom: 0.7rem; /* Reduced margin */
+}
+
+.key-performance-card ul {
+    list-style: disc;
+    padding-left: 0.9rem; /* Reduced padding */
+    margin-top: 0;
+    margin-bottom: 0;
+    color: #334155;
+}
+
+.key-performance-card ul li {
+    font-size: 0.85rem; /* Reduced font size */
+    line-height: 1.2; /* Reduced line height */
+    margin-bottom: 0.15rem; /* Reduced margin */
+}
+/* Styling for the second page content */
+.second-page-content, .third-page-content {
+    margin-top: 3rem; /* Reduced margin */
+}
+
+/* Removed specific second/third page header styles as they'll use .header-section */
+/* .second-page-header-left, .third-page-header-left { ... } */
+/* .second-page-qbr-right-container, .third-page-qbr-right-container { ... } */
+/* .second-page-qbr-right, .third-page-qbr-right { ... } */
+/* .second-page-qbr-date, .third-page-qbr-date { ... } */
+
+.second-page-content .content-heading, .third-page-content .content-heading {
+    font-size: 1.3rem; /* Reduced font size */
+    font-weight: 600;
+    color: #1a237e;
+    margin-bottom: 0.8rem; /* Reduced margin */
+}
+/* Styles for the new support health cards */
+.support-health-cards-container {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    gap: 0.7rem; /* Reduced gap */
+    margin-top: 0.8rem; /* Reduced margin */
+    overflow-x: auto;
+    padding-bottom: 0.3rem; /* Reduced padding */
+}
+.support-health-card {
+    background-color: #f8fafc;
+    border-radius: 7px; /* Slightly less rounded */
+    padding: 0.7rem; /* Reduced padding */
+    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.07); /* Added subtle shadow */
+    flex: 0 0 calc(33.333% - 0.46rem);
+    min-width: 170px; /* Further reduced minimum width */
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Added transition for hover effect */
+}
+.support-health-card:hover {
+    transform: translateY(-3px); /* Smaller lift effect on hover */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1); /* Stronger shadow on hover */
+}
+.support-health-card .title {
+    font-size: 0.8rem; /* Reduced font size */
+    font-weight: 500;
+    color: #475569;
+    margin-bottom: 0.3rem;
+}
+.support-health-card .value {
+    font-size: 1.5rem; /* Reduced font size */
+    font-weight: 700;
+    color: #1a237e;
+    margin-bottom: 0.15rem;
+}
+.support-health-card .change {
+    font-size: 0.7rem; /* Reduced font size */
+    font-weight: 500;
+    color: #16a34a;
+    line-height: 1;
+}
+.support-health-card .change.negative {
+    color: #dc2626;
+}
+
+/* Support Ticket Categories Card */
+.support-categories-card {
+    background-color: rgba(248, 250, 252, 0.7); /* Milder background color */
+    border-radius: 7px; /* Slightly less rounded */
+    padding: 1rem; /* Reduced padding */
+    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.07); /* Added subtle shadow */
+    margin-top: 1.5rem;
+    width: 100%;
+    text-align: left;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Added transition for hover effect */
+}
+.support-categories-card:hover {
+    transform: translateY(-3px); /* Smaller lift effect on hover */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1); /* Stronger shadow on hover */
+}
+
+.support-categories-card .card-title {
+    font-size: 0.95rem; /* Reduced font size */
+    font-weight: 600;
+    color: #1a237e;
+    margin-bottom: 1rem; /* Reduced margin */
+}
+
+.support-categories-card .category-item {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0.7rem; /* Reduced margin */
+}
+
+.support-categories-card .category-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.15rem; /* Reduced margin */
+}
+
+.support-categories-card .category-name {
+    font-size: 0.85rem; /* Reduced font size */
+    color: #334155;
+    font-weight: 500;
+}
+
+.support-categories-card .category-percentage {
+    font-size: 0.85rem; /* Reduced font size */
+    font-weight: 600;
+    color: #1a237e;
+}
+
+.support-categories-card .progress-bar-container {
+    width: 100%;
+    height: 4px; /* Reduced height */
+    background-color: #e2e8f0;
+    border-radius: 2px; /* Slightly less rounded */
+    overflow: hidden;
+}
+
+.support-categories-card .progress-bar {
+    height: 100%;
+    border-radius: 2px; /* Slightly less rounded */
+}
+/* Specific colors for progress bars based on image */
+.support-categories-card .progress-bar.red-bar { background-color: #ef4444; }
+.support-categories-card .progress-bar.orange-bar { background-color: #f97316; }
+.support-categories-card .progress-bar.blue-bar { background-color: #3b82f6; }
+.support-categories-card .progress-bar.green-bar { background-color: #22c55e; }
+
+/* Support Recommendations Card */
+.support-recommendations-card {
+    background-color: rgba(248, 250, 252, 0.7); /* Milder background color */
+    border-radius: 7px; /* Slightly less rounded */
+    padding: 1rem; /* Reduced padding */
+    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.07); /* Added subtle shadow */
+    margin-top: 1.5rem;
+    width: 100%;
+    text-align: left;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Added transition for hover effect */
+}
+.support-recommendations-card:hover {
+    transform: translateY(-3px); /* Smaller lift effect on hover */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1); /* Stronger shadow on hover */
+}
+
+.support-recommendations-card .card-title {
+    font-size: 0.95rem; /* Reduced font size */
+    font-weight: 600;
+    color: #1a237e;
+    margin-bottom: 0.7rem; /* Reduced margin */
+}
+
+.support-recommendations-card ul {
+    list-style: disc;
+    padding-left: 0.9rem; /* Reduced padding */
+    margin-top: 0;
+    margin-bottom: 0;
+    color: #334155;
+}
+
+.support-recommendations-card ul li {
+    font-size: 0.85rem; /* Reduced font size */
+    line-height: 1.2; /* Reduced line height */
+    margin-bottom: 0.15rem; /* Reduced margin */
+}
+
+/* Industry Benchmarking Section */
+.industry-benchmarking-section {
+    background-color: rgba(248, 250, 252, 0.7); /* Milder background color */
+    border-radius: 7px; /* Slightly less rounded */
+    padding: 1rem; /* Reduced padding */
+    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.07); /* Added subtle shadow */
+    margin-top: 1.5rem;
+    width: 100%;
+    text-align: left;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Added transition for hover effect */
+}
+.industry-benchmarking-section:hover {
+    transform: translateY(-3px); /* Smaller lift effect on hover */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1); /* Stronger shadow on hover */
+}
+
+.industry-benchmarking-section .section-heading {
+    font-size: 1.3rem; /* Reduced font size */
+    font-weight: 600;
+    color: #1a237e;
+    margin-bottom: 0.6rem; /* Reduced margin */
+}
+
+.industry-benchmarking-section p {
+    font-size: 0.9rem; /* Reduced font size */
+    line-height: 1.4; /* Reduced line height */
+    color: #334155;
+    margin-bottom: 0;
+}
+
+/* Benchmarking Comparison Containers */
+.benchmarking-comparison-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 1rem; /* Reduced gap */
+    margin-top: 1rem; /* Reduced margin */
+    margin-bottom: 1.5rem; /* Reduced margin */
+}
+
+.benchmarking-chart-card {
+    background-color: #f8fafc; /* Very light blue background, similar to other cards */
+    border-radius: 7px; /* Slightly less rounded */
+    padding: 1rem; /* Reduced padding */
+    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.07); /* Added subtle shadow */
+    flex: 1 1 calc(50% - 0.5rem);
+    min-width: 260px; /* Reduced min-width */
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Added transition for hover effect */
+}
+.benchmarking-chart-card:hover {
+    transform: translateY(-3px); /* Smaller lift effect on hover */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1); /* Stronger shadow on hover */
+}
+
+.benchmarking-chart-card .chart-title {
+    font-size: 0.95rem; /* Reduced font size */
+    font-weight: 600;
+    color: #000000;
+    margin-bottom: 0.8rem; /* Reduced margin */
+}
+
+.benchmarking-item {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0.7rem; /* Reduced margin */
+}
+
+.benchmarking-item .label-value-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.15rem; /* Reduced margin */
+}
+
+.benchmarking-item .label {
+    font-size: 0.85rem; /* Reduced font size */
+    color: #334155;
+    font-weight: 500;
+}
+
+.benchmarking-item .value {
+    font-size: 0.85rem; /* Reduced font size */
+    font-weight: 600;
+    color: #1a237e;
+}
+
+.benchmarking-item .progress-bar-container {
+    width: 100%;
+    height: 4px; /* Reduced height */
+    background-color: #e2e8f0;
+    border-radius: 2px; /* Slightly less rounded */
+    overflow: hidden;
+}
+
+.benchmarking-item .progress-bar {
+    height: 100%;
+    border-radius: 2px; /* Slightly less rounded */
+}
+/* Specific colors for benchmarking bars */
+.benchmarking-item .progress-bar.green-bar-large { background-color: #22c55e; }
+.benchmarking-item .progress-bar.gray-bar { background-color: #64748b; }
+.benchmarking-item .progress-bar.blue-bar-large { background-color: #3b82f6; }
+
+/* Benchmarking Insights Card */
+.benchmarking-insights-card {
+    background-color: rgba(248, 250, 252, 0.7); /* Milder background color */
+    border-radius: 7px; /* Slightly less rounded */
+    padding: 1rem; /* Reduced padding */
+    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.07); /* Added subtle shadow */
+    margin-top: 1.5rem;
+    width: 100%;
+    text-align: left;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Added transition for hover effect */
+}
+.benchmarking-insights-card:hover {
+    transform: translateY(-3px); /* Smaller lift effect on hover */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1); /* Stronger shadow on hover */
+}
+
+.benchmarking-insights-card .card-title {
+    font-size: 0.95rem; /* Reduced font size */
+    font-weight: 600;
+    color: #1a237e;
+    margin-bottom: 0.7rem; /* Reduced margin */
+}
+
+.benchmarking-insights-card ul {
+    list-style: disc;
+    padding-left: 0.9rem; /* Reduced padding */
+    margin-top: 0;
+    margin-bottom: 0;
+    color: #334155;
+}
+
+.benchmarking-insights-card ul li {
+    font-size: 0.85rem; /* Reduced font size */
+    line-height: 1.2; /* Reduced line height */
+    margin-bottom: 0.15rem; /* Reduced margin */
+}
+
+/* Product Expansion Section */
+.product-expansion-section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 1rem; /* Reduced gap */
+    margin-top: 1.5rem; /* Reduced margin */
+    margin-bottom: 1.5rem; /* Reduced margin */
+}
+
+.product-expansion-left-col {
+    flex: 1 1 calc(50% - 0.5rem);
+    min-width: 260px; /* Reduced min-width */
+}
+
+.product-expansion-right-col {
+    flex: 1 1 calc(50% - 0.5rem);
+    min-width: 260px; /* Reduced min-width */
+    background-color: #f8fafc;
+    border-radius: 7px; /* Slightly less rounded */
+    padding: 1rem; /* Reduced padding */
+    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.07); /* Added subtle shadow */
+    display: flex;
+    flex-direction: column;
+    color: #64748b;
+    font-weight: 500;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Added transition for hover effect */
+}
+.product-expansion-right-col:hover {
+    transform: translateY(-3px); /* Smaller lift effect on hover */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1); /* Stronger shadow on hover */
+}
+
+.recommended-products-card {
+    background-color: #f8fafc;
+    border-radius: 7px; /* Slightly less rounded */
+    padding: 1rem; /* Reduced padding */
+    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.07); /* Added subtle shadow */
+    width: 100%;
+    text-align: left;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Added transition for hover effect */
+}
+.recommended-products-card:hover {
+    transform: translateY(-3px); /* Smaller lift effect on hover */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1); /* Stronger shadow on hover */
+}
+
+
+.recommended-products-card .card-title,
+.cross-sell-opportunities-card .card-title {
+    font-size: 0.95rem; /* Reduced font size */
+    font-weight: 600;
+    color: #1a237e;
+    margin-bottom: 1.2rem;
+}
+
+.product-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 1rem; /* Reduced margin */
+}
+
+.product-item .icon-container {
+    width: 32px; /* Reduced size */
+    height: 32px; /* Reduced size */
+    background-color: #e0f2f7;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 0.7rem; /* Reduced margin */
+    flex-shrink: 0;
+}
+
+.product-item .icon-container svg {
+    width: 16px; /* Reduced size */
+    height: 16px; /* Reduced size */
+    color: #1a237e;
+}
+
+.product-item .product-details {
+    flex-grow: 1;
+}
+
+.product-item .product-name {
+    font-size: 0.9rem; /* Reduced font size */
+    font-weight: 600;
+    color: #1a237e;
+    margin-bottom: 0.15rem; /* Reduced margin */
+}
+
+.product-item .product-description {
+    font-size: 0.8rem; /* Reduced font size */
+    color: #475569;
+    line-height: 1.2; /* Reduced line height */
+    margin-bottom: 0.3rem; /* Reduced margin */
+}
+
+.product-item .product-metric {
+    font-size: 0.7rem; /* Reduced font size */
+    font-weight: 500;
+    color: #16a34a;
+    background-color: #dcfce7;
+    padding: 0.15rem 0.3rem; /* Reduced padding */
+    border-radius: 3px; /* Slightly less rounded */
+    display: inline-block;
+}
+
+/* Projected ROI Section */
+.projected-roi-section {
+    background-color: #f8fafc;
+    border-radius: 10px; /* Slightly less rounded */
+    padding: 1rem; /* Reduced padding */
+    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.07); /* Added subtle shadow */
+    width: 100%;
+    text-align: left;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Added transition for hover effect */
+}
+.projected-roi-section:hover {
+    transform: translateY(-3px); /* Smaller lift effect on hover */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1); /* Stronger shadow on hover */
+}
+
+.projected-roi-section .section-title {
+    font-size: 0.95rem; /* Reduced font size */
+    font-weight: 600;
+    color: #1a237e;
+    margin-bottom: 1rem; /* Reduced margin */
+}
+
+.roi-metrics-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 1rem; /* Reduced gap */
+}
+
+.roi-metric-item {
+    text-align: center;
+    flex: 1 1 auto;
+    min-width: 90px; /* Reduced min-width */
+}
+
+.roi-metric-item .label {
+    font-size: 0.8rem; /* Reduced font size */
+    font-weight: 500;
+    color: #475569;
+    margin-bottom: 0.3rem; /* Reduced margin */
+}
+
+.roi-metric-item .value {
+    font-size: 1.5rem; /* Reduced font size */
+    font-weight: 700;
+    color: #1a237e;
+}
+
+/* Next Steps Section */
+.next-steps-section {
+    background-color: #f8fafc;
+    border-radius: 10px; /* Slightly less rounded */
+    padding: 1rem; /* Reduced padding */
+    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.07); /* Added subtle shadow */
+    width: 100%;
+    text-align: left;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Added transition for hover effect */
+}
+.next-steps-section:hover {
+    transform: translateY(-3px); /* Smaller lift effect on hover */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1); /* Stronger shadow on hover */
+}
+
+.next-steps-section .section-title {
+    font-size: 0.95rem; /* Reduced font size */
+    font-weight: 600;
+    color: #1a237e;
+    margin-bottom: 1rem; /* Reduced margin */
+}
+
+.next-steps-section ol {
+    list-style: none;
+    padding-left: 0;
+    counter-reset: step-counter;
+}
+
+.next-steps-section ol li {
+    counter-increment: step-counter;
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 0.7rem; /* Reduced margin */
+    font-size: 0.85rem; /* Reduced font size */
+    color: #334155;
+    line-height: 1.2; /* Reduced line height */
+}
+
+.next-steps-section ol li::before {
+    content: counter(step-counter);
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 20px; /* Reduced size */
+    height: 20px; /* Reduced size */
+    background-color: #e0f2f7;
+    color: #1a237e;
+    border-radius: 50%;
+    font-weight: 600;
+    font-size: 0.75rem; /* Reduced font size */
+    margin-right: 0.5rem; /* Reduced margin */
+    flex-shrink: 0;
+}
+
+/* Your Zoho Support Team Section */
+.zoho-support-team-section {
+    background-color: #f8fafc;
+    border-radius: 10px; /* Slightly less rounded */
+    padding: 1rem; /* Reduced padding */
+    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.07); /* Added subtle shadow */
+    width: 100%;
+    text-align: left;
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Added transition for hover effect */
+}
+.zoho-support-team-section:hover {
+    transform: translateY(-3px); /* Smaller lift effect on hover */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1); /* Stronger shadow on hover */
+}
+
+.zoho-support-team-section .section-title {
+    font-size: 0.95rem; /* Reduced font size */
+    font-weight: 600;
+    color: #1a237e;
+    width: 100%;
+    margin-bottom: 1rem; /* Reduced margin */
+}
+
+.contact-details {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+    min-width: 170px; /* Reduced min-width */
+    margin-bottom: 0.7rem; /* Reduced margin */
+}
+
+.contact-details .icon-container {
+    width: 36px; /* Reduced size */
+    height: 36px; /* Reduced size */
+    background-color: #e0f2f7;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 0.7rem; /* Reduced margin */
+    flex-shrink: 0;
+}
+
+.contact-details .icon-container svg {
+    width: 18px; /* Reduced size */
+    height: 18px; /* Reduced size */
+    color: #1a237e;
+}
+
+.contact-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-info .name {
+    font-size: 0.9rem; /* Reduced font size */
+    font-weight: 600;
+    color: #1e293b;
+    margin-bottom: 0.15rem; /* Reduced margin */
+}
+
+.contact-info .role {
+    font-size: 0.8rem; /* Reduced font size */
+    color: #475569;
+}
+
+.contact-info .email {
+    font-size: 0.8rem; /* Reduced font size */
+    color: #3b82f6;
+    text-decoration: none;
+}
+
+.action-items {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.5rem; /* Reduced gap */
+    min-width: 170px; /* Reduced min-width */
+    margin-top: 0.3rem; /* Reduced margin */
+}
+
+.action-items .schedule-button {
+    background-color: #3b82f6;
+    color: #ffffff;
+    padding: 0.5rem 0.8rem; /* Reduced padding */
+    border-radius: 7px; /* Slightly less rounded */
+    font-weight: 600;
+    text-decoration: none;
+    text-align: center;
+    width: 100%;
+    max-width: 180px; /* Reduced max-width */
+    font-size: 0.85rem; /* Reduced font size */
+}
+
+.action-items .support-number {
+    font-size: 0.8rem; /* Reduced font size */
+    color: #475569;
+    text-align: right;
+    width: 100%;
+    max-width: 180px; /* Reduced max-width */
+}
