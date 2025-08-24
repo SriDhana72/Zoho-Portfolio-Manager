@@ -766,7 +766,7 @@ body { /* Styles for the entire page body */
 }
 /* New styles for the global filter dropdown in Upsell/Cross-sell card */
 .card-filter-select { /* Renamed from section-filter-select */
-    padding: 4px 8px; /* Smaller padding */
+    padding: 4px 10px; /* Smaller padding */
     border: 1px solid #ccc;
     border-radius: 6px;
     font-size: 0.8em; /* Smaller font size */
@@ -1742,7 +1742,10 @@ body { /* Styles for the entire page body */
     }
     /* Make Churn Insights and Strategic Zoho Insights occupy 1 column each when side-by-side */
     .cards-container .card:nth-child(5) { /* Targeting the fifth card (Churn Insights) */
-        grid-column: span 1; /* Make it span one column */
+        grid-column: span 2; /* Make it span one column */
+    }
+    .cards-container .card:nth-child(4) { /* Targeting the fifth card (Churn Insights) */
+        grid-column: span 2; /* Make it span one column */
     }
      /* Removed the nth-child(6) for Strategic Zoho Insights as the card is removed */
 }
