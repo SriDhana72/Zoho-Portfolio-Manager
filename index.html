@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zoho Customer Portfolio Manager</title>
+    <!-- Google Fonts - Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Link to external CSS file -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="nav-bar">
+        <button class="tab-button active" data-tab="dashboard">Account Manager's Dashboard</button>
+        <button class="tab-button" data-tab="merchant360">Merchant 360</button>
+        <button class="tab-button" data-tab="qbrdeck">QBR Deck</button>
+    </div>
+    <div id="dashboard-content" class="widget-container">
+        <div class="header-row">
+            <div class="header-left">
+                <span class="logo-badge">Logo</span>
+                <span class="app-title">Zoho Portfolio Manager</span>
+            </div>
+            <div class="header-right">
+                <div class="search-container">
+                    <input type="text" class="search-input" placeholder="Search customers...">
+                    <span class="search-icon">&#128269;</span>
+                </div>
+                <select class="filter-select">
+                    <option value="">All Segments</option>
+                    <option value="smb">SMB</option>
+                    <option value="enterprise">Enterprise</option>
+                </select>
+                <select class="filter-select">
+                    <option value="">All Industries</option>
+                    <option value="tech">Technology</option>
+                    <option value="finance">Finance</option>
+                    <option value="education">Education</option>
+                </select>
+                <select class="filter-select">
+                    <option value="">All Health Scores</option>
+                    <option value="high">High</option>
+                    <option value="medium">Medium</m>
+                    <option value="low">Low</option>
+                </select>
+                <!-- Combined ARR filter capsule with clickable parts -->
+                <div class="filter-capsule" id="filterArrCapsule">
+                    <span id="arrLessThan5k" class="arr-filter-part">&lt; $5K</span>
+                    <span class="separator-bar">|</span>
+                    <span id="arrGreaterThan5k" class="arr-filter-part">&gt; $5K</span>
+                </div>
+                <div class="user-profile-toggle" id="userProfileToggle">
+                    <div class="user-avatar" id="currentUserAvatar">LG</div>
+                    <span class="user-name" id="currentUserName">Logan</span>
+                    <span class="user-dropdown-arrow">&#9660;</span>
+                </div>
+                <div class="user-dropdown-menu" id="userDropdownMenu">
+                    <ul>
+                        <li data-name="Logan" data-initials="LG" class="selected">Logan</li>
+                        <li data-name="Alice" data-initials="AS">Alice</li>
+                        <li data-name="Bob" data-initials="BP">Bob</li>
+                        <li data-name="Charlie" data-initials="CS">Charlie</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <h2 class="section-title">Portfolio Overview</h2>
+        <div class="info-bar">
+            <span>50 Customers</span>
+            <span class="separator"></span>
+            <span>Last updated : Today, 10:15 AM</span>
+        </div>
+        <div class="cards-container">
+            <!-- Card 1: Total ARR (MTD) - Now includes Active Accounts Details -->
+            <div class="card">
+                <span class="card-percentage-change">+12.4%</span>
+                <div class="card-title">Total ARR (MTD)</div>
+                <div class="card-value">$42.8M</div>
+                <div class="card-comparison">vs $38.1M last month</div>
+                <div class="primary-progress-bar-container">
+                    <div class="primary-progress-bar-fill" style="width: 85%;"></div>
+                </div>
+                <div class="progress-details">
+                    <span>Target : $50M</span>
+                    <span class="achieved">85% achieved</span>
+                </div>
+                <!-- Active Accounts Details moved here -->
+                <div class="secondary-progress-bar-container">
+                    <div class="secondary-progress-bar-fill" style="width: 92%;"></div>
+                </div>
+                <div class="secondary-progress-details">
+                    <span class="inactive-info">Active Accounts: 46 of 50</span>
+                    <span class="active-percentage-info">92% active</span>
+                </div>
+            </div>
+            <!-- Card 2: Upsell & Cross-sell (New Card) -->
+            <div class="card">
+                <div class="card-header-with-filter">
+                    <div class="card-title">Upsell & Cross-sell</div>
+                    <select class="card-filter-select" id="upsellCrossSellFilter">
+                        <option value="month">Month</option>
+                        <option value="quarter">Quarter</option>
+                        <option value="year">Year</option>
+                    </select>
+                </div>
+                <div class="upsell-cross-sell-card-content">
+                    <div class="upsell-cross-sell-section">
+                        <h4>Upsell</h4>
+                        <div class="upsell-cross-sell-stats">
+                            <div class="upsell-cross-sell-stat-item">
+                                <span class="upsell-cross-sell-stat-value" id="upsellAccounts">25</span>
+                                <span class="upsell-cross-sell-stat-label">Active Accounts</span>
+                            </div>
+                            <div class="upsell-cross-sell-stat-item">
+                                <span class="upsell-cross-sell-stat-value revenue" id="upsellRevenue">$1.5M</span>
+                                <span class="upsell-cross-sell-stat-label">Revenue Generated</span>
+                            </div>
+                        </div>
+                        <div class="upsell-cross-sell-chart-container">
+                            <canvas id="upsellChart"></canvas>
+                        </div>
+                    </div>
+                    <!-- New Separator Bar -->
+                    <div class="upsell-cross-sell-separator"></div>
+                    <div class="upsell-cross-sell-section">
+                        <h4>Cross-sell</h4>
+                        <div class="upsell-cross-sell-stats">
+                            <div class="upsell-cross-sell-stat-item">
+                                <span class="upsell-cross-sell-stat-value" id="crossSellAccounts">18</span>
+                                <span class="upsell-cross-sell-stat-label">Active Accounts</span>
+                            </div>
+                            <div class="upsell-cross-sell-stat-item">
+                                <span class="upsell-cross-sell-stat-value revenue" id="crossSellRevenue">$0.8M</span>
+                                <span class="upsell-cross-sell-stat-label">Revenue Generated</span>
+                            </div>
+                        </div>
+                        <div class="upsell-cross-sell-chart-container">
+                            <canvas id="crossSellChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Card 3: Product Adoption -->
+            <div class="card">
+                <div class="card-title">Product Adoption</div> <!-- Direct title now -->
+                <span class="product-change">+5 this month</span> <!-- Keep this positioned absolutely -->
+                <div class="product-items-container" id="productAdoptionContainer">
+                    <!-- Products will be dynamically loaded here by JavaScript -->
+                </div>
+                <div class="show-all-products-wrapper"> <!-- New wrapper for positioning -->
+                    <a href="#" class="show-all-products-link" id="showAllProductsLink">Show All Products</a>
+                </div>
+            </div>
+            <!-- Card 4: Portfolio Health -->
+            <div class="card">
+                <span class="card-status-label good">Good</span>
+                <div class="card-title">Portfolio Health</div>
+                <div class="health-score-circle">76</div>
+                <div class="health-breakdown-grid">
+                    <div class="health-breakdown-item excellent">
+                        <div class="value">18</div>
+                        <div class="label">Excellent</div>
+                    </div>
+                    <div class="health-breakdown-item average">
+                        <div class="value">29</div> <!-- Combined 22 (original good) + 7 (original average) -->
+                        <div class="label">Average</div>
+                    </div>
+                    <div class="health-breakdown-item poor">
+                        <div class="value">3</div>
+                        <div class="label">Poor</div>
+                    </div>
+                </div>
+            </div>
+            <!-- NEW Card 5: Churn Insights (MTD) - Now dynamic with filter -->
+            <div class="card">
+                <div class="card-header-with-filter">
+                    <div class="card-title">Churn Insights</div>
+                    <select class="card-filter-select" id="churnFilter">
+                        <option value="mtd">MTD</option>
+                        <option value="qtr">QTR</option>
+                        <option value="ytd">YTD</option>
+                    </select>
+                </div>
+                <div class="churn-stats-grid">
+                    <div class="churn-stat-item">
+                        <div class="value" id="churnRate">3.5%</div>
+                        <div class="label">Churn Rate</div>
+                    </div>
+                    <div class="churn-stat-item">
+                        <div class="value" id="churnedAccounts">5</div>
+                        <div class="label">Churned Accounts</div>
+                    </div>
+                    <div class="churn-stat-item">
+                        <div class="value" id="revenueLost">$180K</div>
+                        <div class="label">Revenue Lost</div>
+                    </div>
+                </div>
+                <div class="at-risk-description" style="margin-top: 0; margin-bottom: 5px;">Top Reasons for Churn:</div>
+                <ul class="churn-reasons-list" id="churnReasonsList">
+                    <li>Low Zoho product adoption (CRM, Books)</li>
+                    <li>Lack of proactive support engagement</li>
+                    <li>Competitive pricing/features</li>
+                </ul>
+                <button class="churn-action-button" id="analyzeChurnBtn">Analyze Churned Accounts</button>
+            </div>
+            <!-- Removed Card 6: Strategic Zoho Insights -->
+        </div>
+        <!-- Charts Section Wrapper -->
+        <div class="charts-section-wrapper">
+            <!-- ARR Trend Graphs Container -->
+            <div class="arr-trend-section">
+                <div class="arr-trend-header">
+                    <h3>ARR Trend Comparison</h3>
+                    <select class="arr-trend-dropdown" id="arrTrendFilter">
+                        <option value="current">Current Year vs. Previous Year</option>
+                        <option value="6months">Last 6 Months</option>
+                        <option value="12months">Last 12 Months</option>
+                        <option value="ytd">Year to Date</option>
+                    </select>
+                </div>
+                <div class="arr-trend-canvas-container">
+                    <canvas id="arrTrendChart"></canvas>
+                </div>
+            </div>
+            <!-- NEW: Combination Chart (GMV & Conversion Rate) Section -->
+            <div class="gmv-by-industry-section">
+                <div class="gmv-header">
+                    <h3>Combination Chart (GMV & Conversion Rate)</h3>
+                    <select class="gmv-dropdown">
+                        <option value="mtd">MTD</option>
+                        <option value="qtr">QTR</option>
+                        <option value="ytd">YTD</option>
+                    </select>
+                </div>
+                <div class="chart-container">
+                    <canvas id="gmvConversionChartCanvas"></canvas>
+                </div>
+            </div>
+        </div>
+        <!-- NEW Section: Customer Portfolio Table -->
+        <div class="customer-portfolio-section">
+            <div class="customer-portfolio-header">
+                <h3>Customer Portfolio</h3>
+                <div style="display: flex; gap: 10px;"> <!-- Container for filter and sort buttons -->
+                    <button class="control-button" id="openFilterModalBtn">
+                        <span class="filter-icon">&#9660;</span> Filter <!-- Unicode down arrow for filter -->
+                    </button>
+                    <button class="control-button" id="openSortModalBtn">
+                        <span class="sort-icon">&#8597;</span> Sort <!-- Unicode up-down arrow for sort -->
+                    </button>
+                </div>
+            </div>
+            <div class="merchant-table-wrapper">
+                <table class="merchant-table">
+                    <thead>
+                        <tr>
+                            <th>CUSTOMER</th>
+                            <th>INDUSTRY</th>
+                            <th>INDUSTRY SECTOR</th>
+                            <th>ARR (MTD)</th>
+                            <th>PRODUCTS</th>
+                            <th>HEALTH SCORE</th>
+                            <th>STATUS</th>
+                            <th>LAST INTERACTION</th>
+                            <th>ACTIONS</th>
+                        </tr>
+                    </thead>
+                    <tbody id="merchantTableBody">
+                        <!-- Table rows will be inserted here by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+            <div class="pagination-container">
+                <div class="pagination-info" id="paginationInfo">
+                    Showing 1 to 5 of 11 customers
+                </div>
+                <div class="pagination-controls">
+                    <button class="pagination-button" id="prevPageBtn">&lt;</button>
+                    <div id="pageNumbers">
+                        <!-- Page number buttons will be inserted here by JavaScript -->
+                    </div>
+                    <button class="pagination-button" id="nextPageBtn">&gt;</button>
+                </div>
+            </div>
+        </div>
+        <!-- NEW: Container for Action Items, Growth Opportunities, and At-Risk Merchants to display side-by-side -->
+        <div class="side-by-side-sections">
+            <!-- Action Items Section -->
+            <div class="action-items-section">
+                <div class="action-items-header">
+                    <h3>Action Items</h3>
+                    <span class="pending-badge">3 pending</span>
+                </div>
+                <div class="action-items-grid">
+                    <!-- Action Item 1: Danger (Red) -->
+                    <div class="action-item-card danger">
+                        <span class="action-item-icon">&#9888;</span> <!-- Exclamation icon -->
+                        <div class="action-item-content">
+                            <div class="action-item-title">Contract Renewal: Fashion Retail Co.</div>
+                            <div class="action-item-description">Due in 5 days</div>
+                            <button class="action-item-button">Schedule Call</button>
+                        </div>
+                    </div>
+                    <!-- Action Item 2: Warning (Yellow) -->
+                    <div class="action-item-card warning">
+                        <span class="action-item-icon">&#9888;</span> <!-- Exclamation icon -->
+                        <div class="action-item-content">
+                            <div class="action-item-title">Payment Failures: HealthTech Solutions</div>
+                            <div class="action-item-description">3.5% increase in failures</div>
+                            <button class="action-item-button yellow">Investigate</button>
+                        </div>
+                    </div>
+                    <!-- Action Item 3: Info (Blue) -->
+                    <div class="action-item-card info">
+                        <span class="action-item-icon">&#9998;</span> <!-- Pencil icon -->
+                        <div class="action-item-content">
+                            <div class="action-item-title">QBR Preparation: Global SaaS Inc.</div>
+                            <div class="action-item-description">Scheduled for next week</div>
+                            <button class="action-item-button">Prepare Report</button>
+                        </div>
+                    </div>
+                </div>
+                <a href="#" class="view-all-link">View All Action Items</a>
+            </div>
+            <!-- Growth Opportunities Section -->
+            
+<div class="growth-opportunities-section">
+    <div class="growth-opportunities-header">
+        <div class="growth-opportunities-header-content">
+            <h3>Growth Opportunities</h3>
+            <select class="card-filter-select" id="growthOpportunityFilter">
+                <option value="upsell">Upsell</option>
+                <option value="cross-sell">Cross-sell</option>
+            </select>
+        </div>
+        <span class="identified-badge" id="growthOpportunitiesBadge">3 identified</span>
+    </div>
+    <div class="opportunities-grid" id="opportunitiesGrid"><div class="opportunity-card">
+        <div class="opportunity-content">
+            <div class="opportunity-title">CRM Advanced Feature Upsell</div>
+            <div class="opportunity-description">Offer advanced CRM features like SalesIQ and workflow automation to 20 clients.</div>
+            <div class="opportunity-progress-bar-container">
+                <div class="opportunity-progress-bar-fill" style="width: 40%;"></div>
+            </div>
+            <div class="opportunity-stats">
+                <span>20/50 clients</span>
+                <span class="value">$150K opportunity</span>
+            </div>
+        </div>
+    </div><div class="opportunity-card">
+        <div class="opportunity-content">
+            <div class="opportunity-title">Zoho One Suite Upgrade</div>
+            <div class="opportunity-description">Propose Zoho One to 10 clients currently using 3+ individual Zoho apps.</div>
+            <div class="opportunity-progress-bar-container">
+                <div class="opportunity-progress-bar-fill" style="width: 20%;"></div>
+            </div>
+            <div class="opportunity-stats">
+                <span>10/50 clients</span>
+                <span class="value">$250K opportunity</span>
+            </div>
+        </div>
+    </div><div class="opportunity-card">
+        <div class="opportunity-content">
+            <div class="opportunity-title">Analytics Premium Plan</div>
+            <div class="opportunity-description">Target 15 clients for an upgrade to Zoho Analytics Premium features.</div>
+            <div class="opportunity-progress-bar-container">
+                <div class="opportunity-progress-bar-fill" style="width: 30%;"></div>
+            </div>
+            <div class="opportunity-stats">
+                <span>15/50 clients</span>
+                <span class="value">$80K opportunity</span>
+            </div>
+        </div>
+    </div></div>
+    <a href="#" class="view-all-link">View All Opportunities</a>
+</div>
+
+            <!-- NEW: At-Risk Merchants Section (Zoho Business Focus) -->
+            <div class="at-risk-merchants-section">
+                <div class="at-risk-merchants-header">
+                    <h3>At-Risk Accounts</h3>
+                    <span class="merchants-badge">4 accounts</span>
+                </div>
+                <div class="at-risk-merchants-grid">
+                    <!-- At-Risk Account 1: Low CRM Usage -->
+                    <div class="at-risk-card">
+                        <div class="at-risk-merchant-avatar">AC</div>
+                        <div class="at-risk-content">
+                            <div class="at-risk-main-info-row">
+                                <div class="at-risk-text-details">
+                                    <span class="at-risk-merchant-name">Alpha Corp</span>
+                                    <span class="at-risk-sub-info">-5.2% Engagement • Health: 58</span>
+                                </div>
+                                <div class="at-risk-health-score-circle">58</div>
+                            </div>
+                            <div class="at-risk-description">Risk Factors:</div>
+                            <ul class="risk-factors-list">
+                                <li>Low CRM feature adoption (SalesIQ, Campaigns)</li>
+                                <li>No recent support interactions (passive churn risk)</li>
+                            </ul>
+                            <button class="schedule-button">Initiate Engagement</button>
+                        </div>
+                    </div>
+                    <!-- At-Risk Account 2: Overdue Invoices & Books Issues -->
+                    <div class="at-risk-card">
+                        <div class="at-risk-merchant-avatar">BS</div>
+                        <div class="at-risk-content">
+                            <div class="at-risk-main-info-row">
+                                <div class="at-risk-text-details">
+                                    <span class="at-risk-merchant-name">Beta Solutions</span>
+                                    <span class="at-risk-sub-info">-2.1% Payment Rate • Health: 34</span>
+                                </div>
+                                <div class="at-risk-health-score-circle">34</div>
+                            </div>
+                            <div class="at-risk-description">Risk Factors:</div>
+                            <ul class="risk-factors-list">
+                                <li>2 invoices overdue by 30+ days in Zoho Books</li>
+                                <li>Unresolved integration errors with external payment gateway</li>
+                            </ul>
+                            <button class="schedule-button">Follow-up on Payments</button>
+                        </div>
+                    </div>
+                </div>
+                <a href="#" class="view-all-link">View All At-Risk Accounts</a>
+            </div>
+        </div>
+    </div>
+    <!-- Merchant 360 Content (Initially hidden) -->
+    <div id="merchant-360-content" class="dynamic-content">
+        <h2>Merchant 360 View 🌍</h2>
+        <p>This section will provide a comprehensive 360-degree view of a specific merchant, including their history, product usage, interaction logs, and key metrics. This is where you'd typically pull data from various sources to build a complete customer profile.</p>
+        <p>For now, imagine detailed customer analytics, support tickets, and sales data living here.</p>
+    </div>
+    <!-- QBR Deck Content (Initially hidden) -->
+    <div id="qbr-deck-content" class="dynamic-content">
+        <h2>QBR Deck Generator 📈</h2>
+        <p>This section is designed to help you prepare Quarterly Business Review (QBR) decks for your key accounts. It would ideally feature tools to automatically generate slides with performance summaries, strategic recommendations, and future plans.</p>
+        <p>Think of it as your automated presentation builder for client reviews!</p>
+    </div>
+    <!-- Filter Modal Structure -->
+    <div id="filterModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Apply Filters</h2>
+                <span class="modal-close-btn" id="closeFilterModalBtn">&times;</span>
+            </div>
+            <div class="modal-body" id="filterModalBody">
+                <p style="font-size: 0.9em; color: #616161; margin-top: 0;">Add one or more conditions to filter the customer table.</p>
+                <!-- Dynamic filter rows will be added here -->
+            </div>
+            <button class="add-filter-btn" id="addFilterRowBtn">
+                <span>+</span> Add another filter
+            </button>
+            <div class="modal-footer">
+                <button class="clear-all-btn" id="clearAllFiltersBtn">Clear All</button>
+                <button class="apply-filters-btn" id="applyFiltersBtn">Apply Filters</button>
+            </div>
+        </div>
+    </div>
+    <!-- Sort Modal Structure -->
+    <div id="sortModal" class="modal-overlay">
+        <div class="modal-content sort-modal-content">
+            <div class="modal-header">
+                <h2>Sort Table</h2>
+                <span class="modal-close-btn" id="closeSortModalBtn">&times;</span>
+            </div>
+            <div class="modal-body">
+                <p style="font-size: 0.9em; color: #616161; margin-top: 0;">Select a column and a direction to sort the customer table.</p>
+                <div class="sort-option-row">
+                    <span class="modal-label">Column</span>
+                    <select id="sortColumnSelect">
+                        <option value="name">CUSTOMER</option>
+                        <option value="industry">INDUSTRY</option>
+                        <option value="industrySector">INDUSTRY SECTOR</option>
+                        <option value="arr">ARR</option>
+                        <option value="products">PRODUCTS</option>
+                        <option value="healthScore">HEALTH SCORE</option>
+                        <option value="status">STATUS</option>
+                        <option value="lastInteraction">LAST INTERACTION</option>
+                    </select>
+                </div>
+                <div class="sort-option-row">
+                    <span class="modal-label">Direction</span>
+                    <button class="sort-direction-btn active" id="sortAscendingBtn" data-direction="asc">
+                        <svg viewBox="0 0 24 24"><path d="M12 2L6.5 7h11L12 2zm-5 15h10v2H7zm0-4h10v2H7zm0-4h10v2H7z"/></svg> Ascending
+                    </button>
+                    <button class="sort-direction-btn" id="sortDescendingBtn" data-direction="desc">
+                        <svg viewBox="0 0 24 24"><path d="M12 22l5.5-5h-11L12 22zm5-15H7V5h10zm0-4H7V1h10z"/></svg> Descending
+                    </button>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="clear-all-btn" id="clearSortBtn">Clear Sort</button>
+                <button class="apply-sort-btn" id="applySortBtn">Apply Sort</button>
+            </div>
+        </div>
+    </div>
+    <!-- New: All Products Modal Structure -->
+    <div id="allProductsModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>All Zoho Products</h2>
+                <span class="modal-close-btn" id="closeAllProductsModalBtn">&times;</span>
+            </div>
+            <div class="modal-body" id="allProductsModalBody" style="max-height: 400px; overflow-y: auto;">
+                <!-- Full list of products will be loaded here -->
+            </div>
+            <div class="modal-footer" style="justify-content: center;">
+                 <button class="clear-all-btn" id="closeAllProductsModalFooterBtn">Close</button>
+            </div>
+        </div>
+    </div>
+    <!-- NEW: Churn Analysis Modal Structure -->
+    <div id="churnAnalysisModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Churn Analysis Report</h2>
+                <span class="modal-close-btn" id="closeChurnAnalysisModalBtn">&times;</span>
+            </div>
+            <div class="modal-body">
+                <h3>Overview of Churned Accounts</h3>
+                <p>This report provides a deeper look into accounts that have churned recently, focusing on key metrics and underlying reasons within the Zoho ecosystem.</p>
+                <div class="detail-item">
+                    <span class="label">Total Churned Accounts:</span>
+                    <span class="value" id="modalChurnedAccounts">5</span>
+                </div>
+                <div class="detail-item">
+                    <span class="label">Total Revenue Lost:</span>
+                    <span class="value" id="modalRevenueLost">$180,000</span>
+                </div>
+                <div class="detail-item">
+                    <span class="label">Average Contract Value (ACV) of Churned:</span>
+                    <span class="value" id="modalAverageAcv">$36,000</span>
+                </div>
+
+                <h3>Key Product Usage Correlates</h3>
+                <p>Analysis shows that a significant portion of churned accounts exhibited low engagement with critical Zoho products or features:</p>
+                <ul class="suggestions-list">
+                    <li><strong>Zoho CRM:</strong> Accounts often had incomplete contact data or infrequent sales activity logging.</li>
+                    <li><strong>Zoho Books:</strong> High incidence of delayed payments or unlinked invoicing, indicating financial health issues.</li>
+                    <li><strong>Zoho Desk:</strong> Limited use of helpdesk features, suggesting unaddressed customer support needs.</li>
+                    <li><strong>Zoho Analytics:</strong> Low adoption of reporting tools, leading to a lack of data-driven decision-making.</li>
+                </ul>
+
+                <h3>Common Feedback & Trends</h3>
+                <p>Based on exit surveys and account manager notes, common themes include:</p>
+                <ul class="suggestions-list">
+                    <li><strong>Feature Parity:</strong> Perception of competitors offering more specialized features (e.g., advanced marketing automation).</li>
+                    <li><strong>Onboarding Gaps:</strong> Initial setup challenges or lack of comprehensive training on integrated Zoho solutions.</li>
+                    <li><strong>Cost vs. Value:</strong> Some SMBs found advanced features overwhelming or not cost-effective for their specific needs.</li>
+                </ul>
+
+                <h3>Suggested Retention Strategies</h3>
+                <ul class="suggestions-list">
+                    <li>Implement <strong>proactive health checks</strong> for accounts with low CRM/Books activity.</li>
+                    <li>Offer <strong>targeted feature adoption workshops</strong> for specific Zoho products like Desk or Analytics.</li>
+                    <li>Develop a <strong>personalized onboarding journey</strong> emphasizing cross-product integration.</li>
+                    <li>Engage "at-risk" accounts with <strong>exclusive webinars</strong> showcasing new Zoho features or success stories.</li>
+                </ul>
+            </div>
+            <div class="modal-footer" style="justify-content: center;">
+                 <button class="clear-all-btn" id="closeChurnAnalysisModalFooterBtn">Close</button>
+            </div>
+        </div>
+    </div>
+    <!-- Chart.js for data visualization -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Link to external JavaScript file -->
+    <script src="script.js"></script>
+</body>
+</html>
+
