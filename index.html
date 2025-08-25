@@ -12,7 +12,7 @@
 <body>
     <div class="nav-bar">
         <button class="tab-button active" data-tab="dashboard">Account Manager's Dashboard</button>
-        <button class="tab-button" data-tab="merchant360">Merchant 360</button>
+        <button class="tab-button" data-tab="merchant360">Account 360</button>
         <button class="tab-button" data-tab="qbrdeck">QBR Deck</button>
     </div>
     <div id="dashboard-content" class="widget-container">
@@ -21,6 +21,15 @@
                 <img src="img/zoho.png" alt="zoho Logo" width="100" height="40">
                 <span class="app-title">&nbsp;
                     Zoho Portfolio Manager</span>
+                    <title>Refresh Icon</title>
+
+                    <!-- Refresh button -->
+<!-- Refresh button -->
+<button class="refresh-btn" onclick="handleRefresh(event)">
+    <svg class="refresh-icon" viewBox="0 0 24 24">
+        <path d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/>
+    </svg>
+</button>
             </div>
             <div class="header-right">
                 <div class="search-container">
@@ -28,8 +37,8 @@
                     <span class="search-icon">&#128269;</span>
                 </div>
                 <select class="filter-select">
-                    <option value="">All Segments</option>
-                    <option value="smb">SMB</option>
+                    <option value="">Retail</option>
+                    <option value="smb">Mid Market</option>
                     <option value="enterprise">Enterprise</option>
                 </select>
                 <select class="filter-select">
@@ -67,7 +76,7 @@
         </div>
         <h2 class="section-title">Portfolio Overview</h2>
         <div class="info-bar">
-            <span>50 Customers</span>
+            <span>5000 Customers</span>
             <span class="separator"></span>
             <span>Last updated : Today, 10:15 AM</span>
         </div>
@@ -97,11 +106,11 @@
             <!-- Card 2: Upsell & Cross-sell (New Card) -->
             <div class="card">
                 <div class="card-header-with-filter">
-                    <div class="card-title">Upsell & Cross-sell</div>
+                    <div class="card-title"> Upsell & Cross-sell</div>
                     <select class="card-filter-select" id="upsellCrossSellFilter">
-                        <option value="month">Month</option>
-                        <option value="quarter">Quarter</option>
-                        <option value="year">Year</option>
+                        <option value="month"> Month &nbsp;</option>
+                        <option value="quarter">Quarter &nbsp;</option>
+                        <option value="year">Year &nbsp;</option>
                     </select>
                 </div>
                 <div class="upsell-cross-sell-card-content">
@@ -434,7 +443,7 @@
     </div>
     <!-- Merchant 360 Content (Initially hidden) -->
     <div id="merchant-360-content" class="dynamic-content">
-        <h2>Merchant 360 View 🌍</h2>
+        <h2>Account 360 View 🌍</h2>
         <p>This section will provide a comprehensive 360-degree view of a specific merchant, including their history, product usage, interaction logs, and key metrics. This is where you'd typically pull data from various sources to build a complete customer profile.</p>
         <p>For now, imagine detailed customer analytics, support tickets, and sales data living here.</p>
     </div>

@@ -1195,5 +1195,42 @@ function updateGrowthOpportunitiesCard(type) {
 
     growthOpportunitiesBadge.textContent = `${totalCount} identified`;
 }
+function createRipple(element) {
+    const ripple = document.createElement('div');
+    ripple.classList.add('ripple');
+    const rect = element.getBoundingClientRect();
+    const size = Math.max(rect.width, rect.height);
+    ripple.style.width = ripple.style.height = size + 'px';
+    ripple.style.left = (rect.width / 2 - size / 2) + 'px';
+    ripple.style.top = (rect.height / 2 - size / 2) + 'px';
+    element.appendChild(ripple);
+
+    setTimeout(() => ripple.remove(), 600);
+}
+
+function handleRefresh(event) {
+    const btn = event.currentTarget;
+
+    // Spin animation
+    btn.classList.add('spinning');
+
+    // Ripple effect
+    createRipple(btn);
+
+    // Simulate content refresh
+    setTimeout(() => {
+        const dashboard = document.getElementById('dashboard-content');
+        if(dashboard) {
+            // Simple way: force re-render by toggling visibility
+            dashboard.style.display = 'none';
+            setTimeout(() => dashboard.style.display = 'block', 50);
+        }
+
+        // Stop spinning
+        btn.classList.remove('spinning');
+    }, 1000); // Simulate 1 second "refresh"
+}
+
+
 
 
