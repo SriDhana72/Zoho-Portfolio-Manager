@@ -22,6 +22,28 @@ body { /* Styles for the entire page body */
     padding: 20px; /* Add some padding around the content */
     box-sizing: border-box; /* Include padding in width and height */
 }
+.merchant-table th .sort-icons { /* Container for sort icons */
+            display: inline-flex; /* Use flexbox for icons */
+            flex-direction: column; /* Stack icons vertically */
+            margin-left: 5px; /* Space between text and icons */
+            vertical-align: middle; /* Align with text */
+            line-height: 1; /* Ensure icons are close */
+        }
+        .merchant-table th .sort-icon { /* Individual sort icon */
+            font-size: 0.7em; /* Smaller icon size */
+            color: #ccc; /* Default gray color */
+            cursor: pointer; /* Pointer cursor */
+            transition: color 0.2s ease; /* Smooth transition */
+            height: 8px; /* Fixed height for better alignment */
+            display: block; /* Ensure block for stacking */
+            padding-bottom: 1px;
+        }
+        .merchant-table th .sort-icon.active { /* Active sort icon */
+            color: #007bff; /* Blue when active */
+        }
+        .merchant-table th .sort-icon:hover { /* Hover state for sort icons */
+            color: #616161; /* Darker gray on hover */
+        }
 /* Styles for the new navigation bar (tabs) */
 .nav-bar { /* Styling for the top navigation bar */
     background-color: #ffffff; /* White background */
@@ -1681,7 +1703,7 @@ body { /* Styles for the entire page body */
     left: 0; /* Align to left */
 }
 .schedule-button { /* Schedule button in at-risk card */
-    background: var(--gradient-red);
+    background: var(--gradient-green);
     color: white;
     padding: 8px 15px;
     border-radius: 6px;

@@ -442,8 +442,10 @@ function renderTable() { // Renders the customer portfolio table
         actionsTd.innerHTML = `<a href="#" class="action-link">View</a>`; // Populate actions column HTML with link
         row.appendChild(actionsTd); // Append actions column to row
         merchantTableBody.appendChild(row); // Append row to table body
+        
     }
     updatePaginationControls(); // Update pagination controls
+    updateSortIconVisuals(); // Update sort icon visuals
 }
 // Function to apply all filters (including capsule filters)
 function applyAllFilters() { // Applies all active filters and sorting
@@ -670,15 +672,34 @@ applyFiltersBtn.addEventListener('click', () => { // Apply filters on button cli
 });
 // --- Sort Modal Functions and Event Listeners ---
 // Open the sort modal
-openSortModalBtn.addEventListener('click', () => { // Open sort modal on button click
-    sortModal.classList.add('show-flex'); // Show sort modal
-    sortColumnSelect.value = currentSortColumn; // Set initial state of sort controls based on currentSortColumn and currentSortDirection
-    if (currentSortDirection === 'asc') { // If current sort direction is ascending
-        sortAscendingBtn.classList.add('active'); // Activate ascending button
-        sortDescendingBtn.classList.remove('active'); // Deactivate descending button
-    } else { // If current sort direction is descending
-        sortDescendingBtn.classList.add('active'); // Activate descending button
-        sortAscendingBtn.classList.remove('active'); // Deactivate ascending button
+
+ function updateSortIconVisuals() {
+    document.querySelectorAll('.merchant-table th .sort-icon').forEach(icon => {
+        icon.classList.remove('active');
+    });
+    const activeIcon = document.querySelector(`.merchant-table th[data-column="${currentSortColumn}"] .sort-icon.${currentSortDirection}`);
+    if (activeIcon) {
+        activeIcon.classList.add('active');
+    }
+}
+document.querySelectorAll('.merchant-table th').forEach(header => {
+    const column = header.dataset.column;
+    if (column) { // Only add listeners to sortable columns
+        header.querySelectorAll('.sort-icon').forEach(icon => {
+            icon.addEventListener('click', (event) => {
+                const newDirection = event.target.dataset.direction;
+ 
+                if (currentSortColumn === column && currentSortDirection === newDirection) {
+                    // If clicking the active sort icon again, deselect it (optional, but good UX)
+                    currentSortColumn = 'name'; // Reset to default column
+                    currentSortDirection = 'asc'; // Reset to default direction
+                } else {
+                    currentSortColumn = column;
+                    currentSortDirection = newDirection;
+                }
+                applyAllFilters();
+            });
+        });
     }
 });
 // Close the sort modal
@@ -937,60 +958,8 @@ function renderGmvConversionChart() {
         }
     });
 }
-// --- Churn Insights Card Logic ---
-const churnData = {
-    "mtd": { // Month to Date
-        churnRate: "3.5%",
-        churnedAccounts: 5,
-        revenueLost: 180000,
-        reasons: [
-            "Low Zoho product adoption (CRM, Books)",
-            "Lack of proactive support engagement",
-            "Competitive pricing/features"
-        ],
-        detailedReasons: [
-            { label: "Accounts by Industry", value: "3 Retail, 2 SMB" },
-            { label: "Product Usage Factor", value: "70% minimal CRM/SalesIQ" },
-            { label: "Support Interaction Gap", value: "Average 60 days no touch" },
-            { label: "Competitor Mentioned", value: "2 accounts mentioned 'X' competitor" }
-        ],
-        averageAcv: 36000
-    },
-    "qtr": { // Quarter to Date
-        churnRate: "8.2%",
-        churnedAccounts: 18,
-        revenueLost: 650000,
-        reasons: [
-            "Product usability issues (Desk, Analytics)",
-            "Pricing pressure from competitors",
-            "Lack of feature parity (Sites, Campaigns)"
-        ],
-        detailedReasons: [
-            { label: "Accounts by Industry", value: "8 SaaS, 5 E-commerce, 5 Other" },
-            { label: "Product Usage Factor", value: "85% limited Desk/Analytics use" },
-            { label: "Pricing Feedback", value: "10 accounts cited pricing as main reason" },
-            { label: "Feature Requests Unmet", value: "6 accounts needed specific integration" }
-        ],
-        averageAcv: 36111
-    },
-    "ytd": { // Year to Date
-        churnRate: "15.1%",
-        churnedAccounts: 32,
-        revenueLost: 1200000,
-        reasons: [
-            "Lack of deep integration with existing tools",
-            "Customer success team engagement gaps",
-            "Business model changes at client side"
-        ],
-        detailedReasons: [
-            { label: "Accounts by Industry", value: "12 Enterprise, 10 SMB, 10 Other" },
-            { label: "Product Usage Factor", value: "90% low cross-product integration" },
-            { label: "CSM Engagement Score", value: "Average 2.5/5 for churned accounts" },
-            { label: "Migration to New Platform", value: "8 accounts moved to alternative solutions" }
-        ],
-        averageAcv: 37500
-    }
-};
+
+
 
 
 const crossSellOpportunitiesData = [
@@ -1036,6 +1005,90 @@ const opportunitiesGrid = document.getElementById('opportunitiesGrid');
 const growthOpportunitiesBadge = document.getElementById('growthOpportunitiesBadge');
 
 
+// --- Churn Insights Card Logic ---
+const churnData = {
+"mtd": { // Month to Date
+churnRate: "3.5%",
+churnedAccounts: 5,
+revenueLost: 180000,
+highestChurnPeriod: "This Month", // Key data point
+highestChurnPercentage: "3.5%", // Associated data point
+reasons: [
+"Low Zoho product adoption (CRM, Books)",
+"Lack of proactive support engagement",
+"Competitive pricing/features"
+],
+detailedReasons: [
+{ label: "Accounts by Industry", value: "3 Retail, 2 SMB" },
+{ label: "Product Usage Factor", value: "70% minimal CRM/SalesIQ" },
+{ label: "Support Interaction Gap", value: "Average 60 days no touch" },
+{ label: "Competitor Mentioned", value: "2 accounts mentioned 'X' competitor" }
+],
+averageAcv: 36000
+},
+"qtr": { // Quarter to Date
+churnRate: "8.2%",
+churnedAccounts: 18,
+revenueLost: 650000,
+highestChurnPeriod: "April (Q2)", // Key data point
+highestChurnPercentage: "3.0%", // Associated data point
+reasons: [
+"Product usability issues (Desk, Analytics)",
+"Pricing pressure from competitors",
+"Lack of feature parity (Sites, Campaigns)"
+],
+detailedReasons: [
+{ label: "Accounts by Industry", value: "8 SaaS, 5 E-commerce, 5 Other" },
+{ label: "Product Usage Factor", value: "85% limited Desk/Analytics use" },
+{ label: "Pricing Feedback", value: "10 accounts cited pricing as main reason" },
+{ label: "Feature Requests Unmet", value: "6 accounts needed specific integration" }
+],
+averageAcv: 36111
+},
+"ytd": { // Year to Date
+churnRate: "15.1%",
+churnedAccounts: 32,
+revenueLost: 1200000,
+highestChurnPeriod: "Q1 2024 (March)", // Key data point
+highestChurnPercentage: "4.5%", // Associated data point
+reasons: [
+"Lack of deep integration with existing tools",
+"Customer success team engagement gaps",
+"Business model changes at client side"
+],
+detailedReasons: [
+{ label: "Accounts by Industry", value: "12 Enterprise, 10 SMB, 10 Other" },
+{ label: "Product Usage Factor", value: "90% low cross-product integration" },
+{ label: "CSM Engagement Score", value: "Average 2.5/5 for churned accounts" },
+{ label: "Migration to New Platform", value: "8 accounts moved to alternative solutions" }
+],
+averageAcv: 37500
+}
+};
+ 
+// ... (other code) ...
+ 
+// Element for the Highest Churn Period in the modal
+const modalHighestChurnPeriod = document.getElementById('modalHighestChurnPeriod');
+ 
+// Function to populate the churn analysis modal with data based on the selected period
+function populateChurnAnalysisModal(period) {
+            const data = churnData[period];
+            if (!data) return;
+
+            modalChurnedAccounts.textContent = data.churnedAccounts;
+            modalRevenueLost.textContent = formatArr(data.revenueLost);
+            modalAverageAcv.textContent = formatArr(data.averageAcv);
+            modalHighestChurnPeriod.textContent = `${data.highestChurnPeriod} (${data.highestChurnPercentage})`; // Populate new element
+        }
+ 
+// Event listener for when the "Analyze Churned Accounts" button is clicked
+analyzeChurnBtn.addEventListener('click', () => {
+const currentPeriod = churnFilter.value; // Get the currently selected filter value (mtd, qtr, ytd)
+populateChurnAnalysisModal(currentPeriod); // Call the function to populate the modal
+churnAnalysisModal.classList.add('show-flex'); // Show the modal
+});
+
 function updateChurnCard(period) {
     const data = churnData[period];
     if (!data) return;
@@ -1055,16 +1108,10 @@ function updateChurnCard(period) {
 function populateChurnAnalysisModal(period) {
     const data = churnData[period];
     if (!data) return;
-
-    modalChurnedAccounts.textContent = data.churnedAccounts;
-    modalRevenueLost.textContent = formatArr(data.revenueLost);
-    modalAverageAcv.textContent = formatArr(data.averageAcv);
-
-    // Dynamically update detailed reasons and suggestions
-    // The modal's static content will act as a template, but we can enhance it
-    // For this example, I'll update the fixed sections with more dynamic data if available.
-    // Keeping the existing structure and adding new dynamic content in the code itself
-    // is simpler for this prompt.
+        modalChurnedAccounts.textContent = data.churnedAccounts;
+        modalRevenueLost.textContent = formatArr(data.revenueLost);
+        modalAverageAcv.textContent = formatArr(data.averageAcv);
+        modalHighestChurnPeriod.textContent = `${data.highestChurnPeriod} (${data.highestChurnPercentage})`; // Populate new element
 }
 
 churnFilter.addEventListener('change', (event) => {
@@ -1140,6 +1187,7 @@ const upsellOpportunitiesData = [
         revenue: 80000
     }
 ];
+
 
  // Event listener for the refresh icon
  refreshIcon.addEventListener('click', () => {
@@ -1230,6 +1278,8 @@ function handleRefresh(event) {
         btn.classList.remove('spinning');
     }, 1000); // Simulate 1 second "refresh"
 }
+
+
 
 
 

@@ -186,11 +186,9 @@
                 <div class="card-header-with-filter">
                     <div class="card-title">Churn Insights</div>
                     <select class="card-filter-select" id="churnFilter">
-                        <option value="mtd">MTD &nbsp; </option>
-                        <option value="qtr">QTR &nbsp;
-                        </option>
-                        <option value="ytd">YTD &nbsp;
-                        </option>
+                        <option value="mtd">MTD &nbsp;</option>
+                        <option value="qtr">QTR &nbsp;</option>
+                        <option value="ytd">YTD &nbsp;</option>
                     </select>
                 </div>
                 <div class="churn-stats-grid">
@@ -208,11 +206,7 @@
                     </div>
                 </div>
                 <div class="at-risk-description" style="margin-top: 0; margin-bottom: 5px;">Top Reasons for Churn:</div>
-                <ul class="churn-reasons-list" id="churnReasonsList">
-                    <li>Low Zoho product adoption (CRM, Books)</li>
-                    <li>Lack of proactive support engagement</li>
-                    <li>Competitive pricing/features</li>
-                </ul>
+                <ul class="churn-reasons-list" id="churnReasonsList"><li>Low Zoho product adoption (CRM, Books)</li><li>Lack of proactive support engagement</li><li>Competitive pricing/features</li></ul>
                 <button class="churn-action-button" id="analyzeChurnBtn">Analyze Churned Accounts</button>
             </div>
         </div>
@@ -257,15 +251,12 @@
             </div>
         </div>
         <!-- NEW Section: Customer Portfolio Table -->
-        <div class="customer-portfolio-section">
+       <div class="customer-portfolio-section">
             <div class="customer-portfolio-header">
                 <h3>Customer Portfolio</h3>
-                <div style="display: flex; gap: 10px;"> <!-- Container for filter and sort buttons -->
+                <div style="display: flex; gap: 10px;"> <!-- Container for filter buttons -->
                     <button class="control-button" id="openFilterModalBtn">
-                        <span class="filter-icon">&#9660;</span> Filter <!-- Unicode down arrow for filter -->
-                    </button>
-                    <button class="control-button" id="openSortModalBtn">
-                        <span class="sort-icon">&#8597;</span> Sort <!-- Unicode up-down arrow for sort -->
+                        <span class="filter-icon">▼</span> Filter <!-- Unicode down arrow for filter -->
                     </button>
                 </div>
             </div>
@@ -273,31 +264,224 @@
                 <table class="merchant-table">
                     <thead>
                         <tr>
-                            <th>CUSTOMER</th>
-                            <th>INDUSTRY</th>
-                            <th>INDUSTRY SECTOR</th>
-                            <th>ARR (MTD)</th>
-                            <th>PRODUCTS</th>
-                            <th>HEALTH SCORE</th>
-                            <th>STATUS</th>
-                            <th>LAST INTERACTION</th>
+                            <th data-column="name">
+                                CUSTOMER
+                                <span class="sort-icons">
+                                    <span class="sort-icon asc active" data-direction="asc">▲</span>
+                                    <span class="sort-icon desc" data-direction="desc">▼</span>
+                                </span>
+                            </th>
+                            <th data-column="industry">
+                                INDUSTRY
+                                <span class="sort-icons">
+                                    <span class="sort-icon asc" data-direction="asc">▲</span>
+                                    <span class="sort-icon desc" data-direction="desc">▼</span>
+                                </span>
+                            </th>
+                            <th data-column="industrySector">
+                                INDUSTRY SECTOR
+                                <span class="sort-icons">
+                                    <span class="sort-icon asc" data-direction="asc">▲</span>
+                                    <span class="sort-icon desc" data-direction="desc">▼</span>
+                                </span>
+                            </th>
+                            <th data-column="arr">
+                                ARR (MTD)
+                                <span class="sort-icons">
+                                    <span class="sort-icon asc" data-direction="asc">▲</span>
+                                    <span class="sort-icon desc" data-direction="desc">▼</span>
+                                </span>
+                            </th>
+                            <th data-column="products">
+                                PRODUCTS
+                                <span class="sort-icons">
+                                    <span class="sort-icon asc" data-direction="asc">▲</span>
+                                    <span class="sort-icon desc" data-direction="desc">▼</span>
+                                </span>
+                            </th>
+                            <th data-column="healthScore">
+                                HEALTH SCORE
+                                <span class="sort-icons">
+                                    <span class="sort-icon asc" data-direction="asc">▲</span>
+                                    <span class="sort-icon desc" data-direction="desc">▼</span>
+                                </span>
+                            </th>
+                            <th data-column="status">
+                                STATUS
+                                <span class="sort-icons">
+                                    <span class="sort-icon asc" data-direction="asc">▲</span>
+                                    <span class="sort-icon desc" data-direction="desc">▼</span>
+                                </span>
+                            </th>
+                            <th data-column="lastInteraction">
+                                LAST INTERACTION
+                                <span class="sort-icons">
+                                    <span class="sort-icon asc" data-direction="asc">▲</span>
+                                    <span class="sort-icon desc" data-direction="desc">▼</span>
+                                </span>
+                            </th>
                             <th>ACTIONS</th>
                         </tr>
                     </thead>
-                    <tbody id="merchantTableBody">
-                        <!-- Table rows will be inserted here by JavaScript -->
-                    </tbody>
+                    <tbody id="merchantTableBody"><tr><td>
+                    <div class="customer-info">
+                        <div class="customer-initials-avatar" style="background-color: #a1887f;">
+                            AT
+                        </div>
+                        <div class="customer-name-and-details">
+                            <div class="customer-name">Artistic Trends</div>
+                            <div class="customer-zuid">ZUID: 440108</div>
+                        </div>
+                    </div>
+                </td><td>Arts &amp; Crafts</td><td>Creative Platforms</td><td>
+                    <div class="arr-value">$890K</div>
+                    <div class="arr-change positive">+7%</div>
+                </td><td>
+                    <span class="product-badge pg">PG</span>
+                
+                    <span class="product-badge books">Books</span>
+                </td><td>
+                    <div class="health-score-badge">
+                        <div class="health-score-circle-small good">
+                            75
+                        </div>
+                        <span class="health-score-text good">Good</span>
+                    </div>
+                </td><td><span class="status-badge active">Active</span></td><td>
+                    <div class="last-interaction-content">
+                        <span class="last-interaction-day">5 days ago</span>
+                        <span class="last-interaction-type">New Feature</span>
+                    </div>
+                </td><td><a href="#" class="action-link">View</a></td></tr><tr><td>
+                    <div class="customer-info">
+                        <div class="customer-initials-avatar" style="background-color: #ab47bc;">
+                            BC
+                        </div>
+                        <div class="customer-name-and-details">
+                            <div class="customer-name">BuildCo Inc.</div>
+                            <div class="customer-zuid">ZUID: 905065</div>
+                        </div>
+                    </div>
+                </td><td>Construction</td><td>Real Estate Tech</td><td>
+                    <div class="arr-value">$980K</div>
+                    <div class="arr-change positive">+7.8%</div>
+                </td><td>
+                    <span class="product-badge pg">PG</span>
+                
+                    <span class="product-badge neo">Neo</span>
+                </td><td>
+                    <div class="health-score-badge">
+                        <div class="health-score-circle-small good">
+                            70
+                        </div>
+                        <span class="health-score-text good">Good</span>
+                    </div>
+                </td><td><span class="status-badge active">Active</span></td><td>
+                    <div class="last-interaction-content">
+                        <span class="last-interaction-day">2 weeks ago</span>
+                        <span class="last-interaction-type">Follow-up</span>
+                    </div>
+                </td><td><a href="#" class="action-link">View</a></td></tr><tr><td>
+                    <div class="customer-info">
+                        <div class="customer-initials-avatar" style="background-color: #42a5f5;">
+                            DC
+                        </div>
+                        <div class="customer-name-and-details">
+                            <div class="customer-name">DataCloud Solutions</div>
+                            <div class="customer-zuid">ZUID: 527166</div>
+                        </div>
+                    </div>
+                </td><td>Tech</td><td>Cloud Services</td><td>
+                    <div class="arr-value">$4.5M</div>
+                    <div class="arr-change positive">+10.5%</div>
+                </td><td>
+                    <span class="product-badge pg">PG</span>
+                
+                    <span class="product-badge neo">Neo</span>
+                
+                    <span class="product-badge analytics">Analytics</span>
+                </td><td>
+                    <div class="health-score-badge">
+                        <div class="health-score-circle-small excellent">
+                            95
+                        </div>
+                        <span class="health-score-text excellent">Excellent</span>
+                    </div>
+                </td><td><span class="status-badge active">Active</span></td><td>
+                    <div class="last-interaction-content">
+                        <span class="last-interaction-day">Yesterday</span>
+                        <span class="last-interaction-type">Data Sync</span>
+                    </div>
+                </td><td><a href="#" class="action-link">View</a></td></tr><tr><td>
+                    <div class="customer-info">
+                        <div class="customer-initials-avatar" style="background-color: #4CAF50;">
+                            ER
+                        </div>
+                        <div class="customer-name-and-details">
+                            <div class="customer-name">EduRight Academy</div>
+                            <div class="customer-zuid">ZUID: 565412</div>
+                        </div>
+                    </div>
+                </td><td>Education</td><td>E-learning</td><td>
+                    <div class="arr-value">$940K</div>
+                    <div class="arr-change positive">+24.2%</div>
+                </td><td>
+                    <span class="product-badge pg">PG</span>
+                
+                    <span class="product-badge neo">Neo</span>
+                
+                    <span class="product-badge pos">POS</span>
+                </td><td>
+                    <div class="health-score-badge">
+                        <div class="health-score-circle-small excellent">
+                            92
+                        </div>
+                        <span class="health-score-text excellent">Excellent</span>
+                    </div>
+                </td><td><span class="status-badge active">Active</span></td><td>
+                    <div class="last-interaction-content">
+                        <span class="last-interaction-day">3 days ago</span>
+                        <span class="last-interaction-type">Product Demo</span>
+                    </div>
+                </td><td><a href="#" class="action-link">View</a></td></tr><tr><td>
+                    <div class="customer-info">
+                        <div class="customer-initials-avatar" style="background-color: #ef5350;">
+                            FR
+                        </div>
+                        <div class="customer-name-and-details">
+                            <div class="customer-name">Fashion Retail Co.</div>
+                            <div class="customer-zuid">ZUID: 873402</div>
+                        </div>
+                    </div>
+                </td><td>Retail</td><td>Apparel &amp; Accessories</td><td>
+                    <div class="arr-value">$2.2M</div>
+                    <div class="arr-change negative">-3.5%</div>
+                </td><td>
+                    <span class="product-badge pg">PG</span>
+                
+                    <span class="product-badge pos">POS</span>
+                
+                    <span class="product-badge engage">Engage</span>
+                </td><td>
+                    <div class="health-score-badge">
+                        <div class="health-score-circle-small good">
+                            68
+                        </div>
+                        <span class="health-score-text good">Good</span>
+                    </div>
+                </td><td><span class="status-badge at-risk">At Risk</span></td><td>
+                    <div class="last-interaction-content">
+                        <span class="last-interaction-day">1 week ago</span>
+                        <span class="last-interaction-type">Support Call</span>
+                    </div>
+                </td><td><a href="#" class="action-link">View</a></td></tr></tbody>
                 </table>
             </div>
             <div class="pagination-container">
-                <div class="pagination-info" id="paginationInfo">
-                    Showing 1 to 5 of 11 customers
-                </div>
+                <div class="pagination-info" id="paginationInfo">Showing 1 to 5 of 11 customers</div>
                 <div class="pagination-controls">
-                    <button class="pagination-button" id="prevPageBtn">&lt;</button>
-                    <div id="pageNumbers">
-                        <!-- Page number buttons will be inserted here by JavaScript -->
-                    </div>
+                    <button class="pagination-button" id="prevPageBtn" disabled="">&lt;</button>
+                    <div id="pageNumbers"><button class="pagination-button active-page">1</button><button class="pagination-button">2</button><button class="pagination-button">3</button></div>
                     <button class="pagination-button" id="nextPageBtn">&gt;</button>
                 </div>
             </div>
@@ -531,33 +715,34 @@
         </div>
     </div>
     <!-- NEW: Churn Analysis Modal Structure -->
-    <div id="churnAnalysisModal" class="modal-overlay">
+   <div id="churnAnalysisModal" class="modal-overlay">
         <div class="modal-content">
             <div class="modal-header">
                 <h2>Churn Analysis Report</h2>
-                <span class="modal-close-btn" id="closeChurnAnalysisModalBtn">&times;</span>
+                <span class="modal-close-btn" id="closeChurnAnalysisModalBtn">×</span>
             </div>
             <div class="modal-body">
-                <h3><span class="churn-icon blue">&#128200;</span> Overview of Churned Accounts</h3>
+                <h3><span class="churn-icon blue">📈</span> Overview of Churned Accounts</h3>
                 <p>This report provides a deeper look into accounts that have churned recently, focusing on key metrics and underlying reasons within the Zoho ecosystem.</p>
                 <div class="detail-item">
-                    <span class="label"><span class="churn-icon red">&#128100;</span> Total Churned Accounts:</span>
+                    <span class="label"><span class="churn-icon red">👤</span> Total Churned Accounts:</span>
                     <span class="value" id="modalChurnedAccounts">5</span>
                 </div>
                 <div class="detail-item">
-                    <span class="label"><span class="churn-icon red">&#128176;</span> Total Revenue Lost:</span>
+                    <span class="label"><span class="churn-icon red">💰</span> Total Revenue Lost:</span>
                     <span class="value" id="modalRevenueLost">$180,000</span>
                 </div>
                 <div class="detail-item">
-                    <span class="label"><span class="churn-icon yellow">&#128181;</span> Average Contract Value (ACV) of Churned:</span>
+                    <span class="label"><span class="churn-icon yellow">💵</span> Average Contract Value (ACV) of Churned:</span>
                     <span class="value" id="modalAverageAcv">$36,000</span>
                 </div>
                 <div class="detail-item">
-                    <span class="label"><span class="churn-icon red">&#128201;</span> Highest Churn Period:</span>
+                    <span class="label"><span class="churn-icon red">📉</span> Highest Churn Period:</span>
                     <span class="value" id="modalHighestChurnPeriod">This Month (3.5%)</span>
                 </div>
                 <hr style="border: 0; height: 1px; background-color: #eee; margin: 20px 0;">
-                <h3><span class="churn-icon green">&#128202;</span> Key Product Usage Correlates</h3>
+
+                <h3><span class="churn-icon green">📊</span> Key Product Usage Correlates</h3>
                 <p>Analysis shows that a significant portion of churned accounts exhibited low engagement with critical Zoho products or features:</p>
                 <ul class="suggestions-list">
                     <li><strong style="font-weight: 600;">Zoho CRM:</strong> Accounts often had incomplete contact data or infrequent sales activity logging.</li>
@@ -567,7 +752,7 @@
                 </ul>
                 <hr style="border: 0; height: 1px; background-color: #eee; margin: 20px 0;">
 
-                <h3><span class="churn-icon yellow">&#128227;</span> Common Feedback & Trends</h3>
+                <h3><span class="churn-icon yellow">📣</span> Common Feedback &amp; Trends</h3>
                 <p>Based on exit surveys and account manager notes, common themes include:</p>
                 <ul class="suggestions-list">
                     <li><strong style="font-weight: 600;">Feature Parity:</strong> Perception of competitors offering more specialized features (e.g., advanced marketing automation).</li>
@@ -576,7 +761,7 @@
                 </ul>
                 <hr style="border: 0; height: 1px; background-color: #eee; margin: 20px 0;">
 
-                <h3><span class="churn-icon blue">&#128161;</span> Suggested Retention Strategies</h3>
+                <h3><span class="churn-icon blue">💡</span> Suggested Retention Strategies</h3>
                 <ul class="suggestions-list">
                     <li>Implement <strong style="font-weight: 600;">proactive health checks</strong> for accounts with low CRM/Books activity.</li>
                     <li>Offer <strong style="font-weight: 600;">targeted feature adoption workshops</strong> for specific Zoho products like Desk or Analytics.</li>
