@@ -2032,7 +2032,7 @@ body { /* Styles for the entire page body */
 .churn-stat-item .value {
     font-size: 1.2em;
     font-weight: 600;
-    color: #dc3545; /* Red for churn values */
+    color: #960715; /* Red for churn values */
     margin-bottom: 5px;
 }
 
