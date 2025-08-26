@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zoho Customer Portfolio Manager</title>
     <!-- Google Fonts - Inter -->
+     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Bootstrap Icons CDN for eye icon -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <!-- Link to external CSS file -->
     <link rel="stylesheet" href="style.css">
@@ -163,23 +166,53 @@
             </div>
             <!-- Card 4: Portfolio Health -->
             <div class="card">
-                <span class="card-status-label good">Good</span>
-                <div class="card-title">Portfolio Health</div>
-                <div class="health-score-circle">76</div>
-                <div class="health-breakdown-grid">
-                    <div class="health-breakdown-item excellent">
-                        <div class="value">18</div>
-                        <div class="label">Excellent</div>
-                    </div>
-                    <div class="health-breakdown-item average">
-                        <div class="value">29</div> <!-- Combined 22 (original good) + 7 (original average) -->
-                        <div class="label">Average</div>
-                    </div>
-                    <div class="health-breakdown-item poor">
-                        <div class="value">3</div>
-                        <div class="label">Poor</div>
-                    </div>
+                <div class="health-card-bg">
+        <!-- Header Section -->
+        <div class="flex justify-between items-center mb-6">
+            <h2 class="text-2xl font-bold text-gray-800">Portfolio Health</h2>
+            <div class="health-badge-container">
+                <span id="healthStatusLabel" class="health-badge good">Good</span>
+                <i id="infoIcon" class="bi bi-info-circle-fill text-gray-400 hover:text-gray-600 cursor-pointer text-lg"></i>
+
+                <!-- Info Popup -->
+                <div id="criteriaPopup" class="info-popup hidden">
+                    <strong>Criteria:</strong>
+                    <ul>
+                        <li><i class="bi bi-star-fill text-yellow-500"></i>90: Excellent</li>
+                        <li><i class="bi bi-check-circle-fill text-green-500"></i>70-89: Good</li>
+                        <li><i class="bi bi-exclamation-triangle-fill text-orange-500"></i>41-69: Average</li>
+                        <li><i class="bi bi-x-circle-fill text-red-500"></i>&lt;40: Poor</li>
+                    </ul>
                 </div>
+            </div>
+        </div>
+
+        <!-- Central Average Health Score (1-100) Display -->
+        <div class="flex flex-col items-center mb-4">
+            <div class="relative w-40 h-40 flex items-center justify-center rounded-full score-circle text-6xl font-extrabold shadow-2xl animate-pulse-once">
+                74
+            </div>
+        </div>
+
+        <!-- Pyramid Visualization -->
+        <div class="flex flex-col items-center w-full space-y-2">
+            <!-- Poor Segment (Top of the pyramid - smallest value) -->
+            <div class="relative w-3/5 bg-red-light hover:bg-red-400 p-4 rounded-lg shadow-lg text-center transition-all duration-300 ease-in-out transform hover:scale-105 pyramid-segment">
+                <span class="font-bold text-lg">Poor: 30</span> <span class="text-md">(7.5%)</span>
+            </div>
+
+            <!-- Average Segment (Middle of the pyramid) -->
+            <div class="relative w-4/5 bg-yellow-light hover:bg-yellow-400 p-4 rounded-lg shadow-lg text-center transition-all duration-300 ease-in-out transform hover:scale-105 pyramid-segment">
+                <span class="font-bold text-lg">Average: 250</span> <span class="text-md">(62.5%)</span>
+            </div>
+
+            <!-- Excellent Segment (Base of the pyramid - largest value) -->
+            <div class="relative w-full bg-green-light hover:bg-green-400 p-4 rounded-lg shadow-lg text-center transition-all duration-300 ease-in-out transform hover:scale-105 pyramid-segment">
+                <span class="font-bold text-lg">Excellent: 120</span> <span class="text-md">(30%)</span>
+            </div>
+        </div>
+    </div>
+
             </div>
             <!-- NEW Card 5: Churn Insights (MTD) - Now dynamic with filter -->
             <div class="card">
@@ -630,17 +663,19 @@
         </div>
     </div>
     <!-- Merchant 360 Content (Initially hidden) -->
-    <div id="merchant-360-content" class="dynamic-content">
-        <h2>Account 360 View 🌍</h2>
-        <p>This section will provide a comprehensive 360-degree view of a specific merchant, including their history, product usage, interaction logs, and key metrics. This is where you'd typically pull data from various sources to build a complete customer profile.</p>
-        <p>For now, imagine detailed customer analytics, support tickets, and sales data living here.</p>
+     <div id="merchant-360-content" class="widget-container-bg" frameborder="0">
+       <div class="iframe-container" >
+            <iframe src="https://sridhana72.github.io/Accounts-Module/"></iframe>
+        </div> 
     </div>
     <!-- QBR Deck Content (Initially hidden) -->
-    <div id="qbr-deck-content" class="dynamic-content">
-        <h2>QBR Deck Generator 📈</h2>
-        <p>This section is designed to help you prepare Quarterly Business Review (QBR) decks for your key accounts. It would ideally feature tools to automatically generate slides with performance summaries, strategic recommendations, and future plans.</p>
-        <p>Think of it as your automated presentation builder for client reviews!</p>
+    <div id="qbr-deck-content" class="dynamic-content-bg" frameborder="0">
+       <div class="iframe-container">
+         <iframe src="https://sridhana72.github.io/QBR-Deck--1/"></iframe>
+        </div> 
     </div>
+
+    
     <!-- Filter Modal Structure -->
     <div id="filterModal" class="modal-overlay">
         <div class="modal-content">

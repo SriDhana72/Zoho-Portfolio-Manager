@@ -413,16 +413,7 @@ function renderTable() { // Renders the customer portfolio table
             <span class="product-badge ${product.toLowerCase()}">${product}</span>
         `).join(''); // Populate products column HTML with badges
         row.appendChild(productsTd); // Append products column to row
-        const healthScoreTd = document.createElement('td'); // Create table data for health score column
-        healthScoreTd.innerHTML = `
-            <div class="health-score-badge">
-                <div class="health-score-circle-small ${customer.healthColor}">
-                    ${customer.healthScore}
-                </div>
-                <span class="health-score-text ${customer.healthColor}">${customer.healthText}</span>
-            </div>
-        `; // Populate health score column HTML
-        row.appendChild(healthScoreTd); // Append health score column to row
+        
         const statusTd = document.createElement('td'); // Create table data for status column
         const statusClass = customer.status.toLowerCase().replace(' ', '-'); // Determine class for status
         statusTd.innerHTML = `<span class="status-badge ${statusClass}">${customer.status}</span>`; // Populate status column HTML with badge
@@ -1187,27 +1178,6 @@ const upsellOpportunitiesData = [
         revenue: 80000
     }
 ];
-
-
- // Event listener for the refresh icon
- refreshIcon.addEventListener('click', () => {
-    refreshIcon.classList.add('is-spinning'); // Add spinning class
-    // This function will re-render all dynamic content on the dashboard
-    applyAllFilters(); // Re-applies filters and re-renders the customer table
-    updateUpsellCrossSellCard(upsellCrossSellFilter.value); // Refreshes upsell/cross-sell charts
-    renderProductAdoption(); // Refreshes product adoption
-    renderArrTrendChart(document.getElementById('arrTrendFilter').value); // Refreshes ARR trend chart
-    renderGmvConversionChart(); // Refreshes GMV conversion chart
-    updateChurnCard(churnFilter.value); // Refreshes churn insights
-    updateGrowthOpportunitiesCard(growthOpportunityFilter.value); // Refreshes Growth Opportunities
-    console.log('Dashboard content refreshed!'); // Log a message for debugging
-
-    // Remove spinning class after a short delay
-    setTimeout(() => {
-        refreshIcon.classList.remove('is-spinning');
-    }, 800); // Match animation duration
-});
-
 function updateGrowthOpportunitiesCard(type) {
     let dataToShow = [];
     let totalCount = 0;
@@ -1279,8 +1249,48 @@ function handleRefresh(event) {
     }, 1000); // Simulate 1 second "refresh"
 }
 
+            const scoreElement = document.querySelector('.score-circle');
+            const healthStatusLabel = document.getElementById('healthStatusLabel');
+            const infoIcon = document.getElementById('infoIcon');
+            const criteriaPopup = document.getElementById('criteriaPopup');
 
+            // Function to update the health status label based on the score
+            function updateHealthStatus(score) {
+                healthStatusLabel.classList.remove('excellent', 'good', 'average', 'poor');
+                let statusText = '';
+                if (score >= 90) {
+                    statusText = 'Excellent';
+                    healthStatusLabel.classList.add('excellent');
+                } else if (score >= 70 && score <= 89) {
+                    statusText = 'Good';
+                    healthStatusLabel.classList.add('good');
+                } else if (score >= 41 && score <= 69) {
+                    statusText = 'Average';
+                    healthStatusLabel.classList.add('average');
+                } else if (score < 40) {
+                    statusText = 'Poor';
+                    healthStatusLabel.classList.add('poor');
+                }
+                healthStatusLabel.textContent = statusText;
+            }
 
+            // Get the current score from the circle and update the label
+            const currentScore = parseInt(scoreElement.textContent);
+            if (!isNaN(currentScore)) {
+                updateHealthStatus(currentScore);
+            }
 
+            // Toggle popup visibility on info icon click
+            infoIcon.addEventListener('click', (event) => {
+                criteriaPopup.classList.toggle('hidden');
+                criteriaPopup.classList.toggle('show');
+                event.stopPropagation(); // Prevent document click from closing it immediately
+            });
 
-
+            // Close popup when clicking anywhere outside it
+            document.addEventListener('click', (event) => {
+                if (!criteriaPopup.classList.contains('hidden') && !infoIcon.contains(event.target) && !criteriaPopup.contains(event.target)) {
+                    criteriaPopup.classList.add('hidden');
+                    criteriaPopup.classList.remove('show');
+                }
+            });

@@ -56,6 +56,12 @@ body { /* Styles for the entire page body */
     gap: 15px; /* Space between tabs */
     flex-wrap: wrap; /* Allow tabs to wrap */
     align-items: center; /* Vertically align items */
+      height: 50px; /* Adjust this value to match your nav bar's height */
+  width: 100%;
+  position: fixed; /* Keep it at the top when scrolling */
+  top: 0;
+  left: 0;
+  z-index: 1000; /* Ensure it stays on top of the iframe */
 }
 .tab-button { /* Styling for individual tab buttons */
     padding: 10px 15px; /* Padding inside buttons */
@@ -87,8 +93,49 @@ body { /* Styles for the entire page body */
     max-width: 98%; /* Slightly wider for the new element */
     box-sizing: border-box; /* Include padding in width calculation */
     position: relative; /* For positioning purposes */
-    top: 0; /* Align to top */
+    top: 40px; /* Align to top */
     left: 0; /* Align to left */
+}
+
+
+.dynamic-content-bg {
+    display: none; /* Hide inactive tabs */
+    position: absolute;
+    top: 50px; /* This is the height of your nav bar */
+    left: 0;
+    width: 100%;
+    height: calc(100vh - 50px); /* Use calc() to fill the remaining space */
+}
+.widget-container-bg {
+   position: absolute;
+    top: 50px; /* This is the height of your nav bar */
+    left: 0;
+    width: 100%;
+    height: calc(100vh - 50px); /* Use calc() to fill the remaining space */
+}
+.iframe-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+.iframe-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+    z-index: 9999;
+}
+   
+.dynamic-content-fullpage{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+    z-index: 9999; /* Use a high z-index to make sure it's on top of other con */
 }
 /* Styles for dynamic content areas */
 .dynamic-content { /* Content sections for different tabs */
@@ -602,57 +649,7 @@ body { /* Styles for the entire page body */
 .show-all-products-link:hover {
     text-decoration: underline; /* Underline on hover */
 }
-/* Portfolio Health Card Specifics */
-.health-score-circle { /* Health score circle */
-    width: 100px; /* Width */
-    height: 100px; /* Height */
-    background: var(--gradient-blue); /* Apply gradient */
-    border-radius: 50%; /* Circle shape */
-    display: flex; /* Flexbox for centering text */
-    justify-content: center; /* Horizontally center */
-    align-items: center; /* Vertically center */
-    font-size: 2.5em; /* Larger font size */
-    font-weight: 700; /* Adjusted font weight */
-    color: white; /* White text */
-    margin: 20px auto; /* Centered with vertical margin */
-}
-.health-breakdown-grid { /* Grid for health breakdown items */
-    display: flex; /* Changed to flex for 3 items */
-    justify-content: space-around; /* Distribute space evenly */
-    gap: 10px; /* Space between items */
-    margin-top: 15px; /* Top margin */
-    flex-wrap: wrap; /* Allow wrapping on smaller screens */
-}
-.health-breakdown-item { /* Individual health breakdown item */
-    background-color: #f8f9fa; /* Uniform background for all items */
-    padding: 10px; /* Padding */
-    border-radius: 6px; /* Rounded corners */
-    text-align: center; /* Center text */
-    flex: 1 1 calc(33.33% - 10px); /* Adjust width for 3 items */
-    min-width: 100px; /* Ensure items don't get too small */
-    box-sizing: border-box; /* Include padding in calculations */
-    display: flex; /* Make it a flex container */
-    flex-direction: column; /* Stack value and label */
-    align-items: center; /* Center horizontally */
-}
-.health-breakdown-item .value { /* Value in health breakdown item */
-    font-size: 1.2em; /* Font size */
-    font-weight: 600; /* Adjusted font weight */
-    color: #333; /* Default value color */
-    margin-bottom: 5px; /* Bottom margin */
-}
-.health-breakdown-item .label { /* Label in health breakdown item */
-    font-size: 0.8em; /* Font size */
-    color: #616161; /* Text color */
-    font-weight: 400; /* Adjusted font weight */
-}
-/* Specific text colors for health breakdown items labels */
-.health-breakdown-item.excellent .label, /* Excellent health text color */
-.health-breakdown-item.excellent .value { color: #28a745; } /* Green for excellent */
-.health-breakdown-item.average .label, /* Average health text color */
-.health-breakdown-item.average .value { color: #ffc107; } /* Yellow for average */
-.health-breakdown-item.poor .label, /* Poor health text color */
-.health-breakdown-item.poor .value { color: #dc3545; } /* Red for poor */
+
 /* Ensure the 'good' item is hidden as per logic */
 .health-breakdown-item.good { display: none; } /* Hide the "Good" category */
 /* New container for the two graph sections */
@@ -1096,7 +1093,7 @@ body { /* Styles for the entire page body */
 }
 /* Make All Products modal smaller */
 #allProductsModal .modal-content {
-    max-width: 300px; /* Smaller max-width */
+    max-width: 400px; /* Smaller max-width */
     padding: 15px; /* Smaller padding */
     gap: 10px; /* Reduced gap between elements */
 }
@@ -1115,7 +1112,7 @@ body { /* Styles for the entire page body */
     font-size: 1.2em; /* Slightly smaller heading */
     color: #333;
     margin-bottom: 10px; /* Reduced margin */
-    font-weight: 600;
+    font-weight: 500;
 }
 #churnAnalysisModal p {
     font-size: 0.85em; /* Slightly smaller font */
@@ -2111,6 +2108,118 @@ body { /* Styles for the entire page body */
     transition: transform 0.3s ease;
 }
 
+.pyramid-segment {
+            color: #333333; /* Darker text for better contrast on light backgrounds */
+            text-shadow: none; /* Remove text shadow as it might not be needed on lighter backgrounds */
+        }
+        /* Dynamic badge styles */
+        .health-badge-container {
+            position: relative; /* Container for badge and info icon/popup */
+            display: flex;
+            align-items: center;
+            gap: 8px; /* Space between badge and icon */
+        }
+        .health-badge {
+            font-size: 0.875rem; /* text-sm */
+            font-weight: 600; /* font-semibold */
+            padding: 0.375rem 1rem; /* px-4 py-1.5 */
+            border-radius: 9999px; /* rounded-full */
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); /* shadow-sm */
+        }
+        .health-badge.excellent {
+            background-color: #787a79; /* Light green */
+            color: #155724; /* Dark green text */
+        }
+        .health-badge.good {
+            background-color: #a1c6e7;
+            color: #06305e;
+        }
+        .health-badge.average {
+            background-color: #636361; /* Light yellow */
+            color: #664d03; /* Dark yellow text */
+        }
+        .health-badge.poor {
+            background-color: #8a8989; /* Light red */
+            color: #842029; /* Dark red text */
+        }
+
+        /* Style for the main score circle - matching the original screenshot's blue gradient */
+        .score-circle {
+            background-image: linear-gradient(to bottom right, #5094ed, #3b82f6); /* Colors from original screenshot */
+            color: #ffffff; /* White text for better contrast on the gradient */
+        }
+       
+
+        /* Styles for the info popup */
+        .info-popup {
+            position: absolute;
+            background-color: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 1rem; /* More rounded corners */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Softer shadow */
+            padding: 0.75rem 1rem; /* Reduced padding */
+            width: 200px; /* Reduced width */
+            z-index: 10;
+            top: calc(100% + 10px); /* Position below the icon */
+            right: 0;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+            color: #333333;
+        }
+        .info-popup.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        .info-popup::before {
+            content: '';
+            position: absolute;
+            bottom: 100%;
+            right: 15px; /* Position the caret above the icon */
+            border-width: 8px;
+            border-style: solid;
+            border-color: transparent transparent #e2e8f0 transparent; /* Match border color */
+            filter: drop-shadow(0 -1px 1px rgba(0,0,0,0.05));
+        }
+        .info-popup::after {
+            content: '';
+            position: absolute;
+            bottom: 100%;
+            right: 15px; /* Position the caret above the icon */
+            border-width: 8px;
+            border-style: solid;
+            border-color: transparent transparent #ffffff transparent; /* Match background color */
+            margin-bottom: 1px; /* To sit just above the border triangle */
+        }
+        .info-popup strong {
+            display: block;
+            margin-bottom: 0.4rem; /* Reduced margin */
+            font-size: 1em; /* Slightly smaller font */
+            color: #1a2b4d;
+        }
+        .info-popup ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .info-popup li {
+            margin-bottom: 0.3rem; /* Reduced margin */
+            font-size: 0.85em; /* Slightly smaller font */
+            display: flex;
+            align-items: center;
+        }
+        .info-popup li:last-child {
+            margin-bottom: 0;
+        }
+        .info-popup .bi {
+            margin-right: 6px; /* Reduced margin */
+            font-size: 1em; /* Slightly smaller icon */
+        }
+        .info-popup .bi-star-fill { color: #facc15; } /* Yellow star */
+        .info-popup .bi-check-circle-fill { color: #10b981; } /* Green check */
+        .info-popup .bi-exclamation-triangle-fill { color: #f97316; } /* Orange warning */
+        .info-popup .bi-x-circle-fill { color: #ef4444; } /* Red cross */
+        
 .refresh-btn:hover svg {
     animation: spin 0.7s ease-in-out;
 }
@@ -2140,3 +2249,4 @@ body { /* Styles for the entire page body */
     }
 }
 
+    
