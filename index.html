@@ -215,7 +215,6 @@
                 </ul>
                 <button class="churn-action-button" id="analyzeChurnBtn">Analyze Churned Accounts</button>
             </div>
-            <!-- Removed Card 6: Strategic Zoho Insights -->
         </div>
         <!-- Charts Section Wrapper -->
         <div class="charts-section-wrapper">
@@ -237,7 +236,12 @@
             <!-- NEW: Combination Chart (GMV & Conversion Rate) Section -->
             <div class="gmv-by-industry-section">
                 <div class="gmv-header">
-                    <h3>Combination Chart (ARR & Conversion Rate)</h3>
+                    <h3>Combination Chart (ARR
+                        
+                        
+                        
+                        
+                        & Conversion Rate)</h3>
                     <select class="gmv-dropdown">
                         <option value="mtd">MTD &nbsp;
                         </option>
@@ -534,44 +538,50 @@
                 <span class="modal-close-btn" id="closeChurnAnalysisModalBtn">&times;</span>
             </div>
             <div class="modal-body">
-                <h3>Overview of Churned Accounts</h3>
+                <h3><span class="churn-icon blue">&#128200;</span> Overview of Churned Accounts</h3>
                 <p>This report provides a deeper look into accounts that have churned recently, focusing on key metrics and underlying reasons within the Zoho ecosystem.</p>
                 <div class="detail-item">
-                    <span class="label">Total Churned Accounts:</span>
+                    <span class="label"><span class="churn-icon red">&#128100;</span> Total Churned Accounts:</span>
                     <span class="value" id="modalChurnedAccounts">5</span>
                 </div>
                 <div class="detail-item">
-                    <span class="label">Total Revenue Lost:</span>
+                    <span class="label"><span class="churn-icon red">&#128176;</span> Total Revenue Lost:</span>
                     <span class="value" id="modalRevenueLost">$180,000</span>
                 </div>
                 <div class="detail-item">
-                    <span class="label">Average Contract Value (ACV) of Churned:</span>
+                    <span class="label"><span class="churn-icon yellow">&#128181;</span> Average Contract Value (ACV) of Churned:</span>
                     <span class="value" id="modalAverageAcv">$36,000</span>
                 </div>
-
-                <h3>Key Product Usage Correlates</h3>
+                <div class="detail-item">
+                    <span class="label"><span class="churn-icon red">&#128201;</span> Highest Churn Period:</span>
+                    <span class="value" id="modalHighestChurnPeriod">This Month (3.5%)</span>
+                </div>
+                <hr style="border: 0; height: 1px; background-color: #eee; margin: 20px 0;">
+                <h3><span class="churn-icon green">&#128202;</span> Key Product Usage Correlates</h3>
                 <p>Analysis shows that a significant portion of churned accounts exhibited low engagement with critical Zoho products or features:</p>
                 <ul class="suggestions-list">
-                    <li><strong>Zoho CRM:</strong> Accounts often had incomplete contact data or infrequent sales activity logging.</li>
-                    <li><strong>Zoho Books:</strong> High incidence of delayed payments or unlinked invoicing, indicating financial health issues.</li>
-                    <li><strong>Zoho Desk:</strong> Limited use of helpdesk features, suggesting unaddressed customer support needs.</li>
-                    <li><strong>Zoho Analytics:</strong> Low adoption of reporting tools, leading to a lack of data-driven decision-making.</li>
+                    <li><strong style="font-weight: 600;">Zoho CRM:</strong> Accounts often had incomplete contact data or infrequent sales activity logging.</li>
+                    <li><strong style="font-weight: 600;">Zoho Books:</strong> High incidence of delayed payments or unlinked invoicing, indicating financial health issues.</li>
+                    <li><strong style="font-weight: 600;">Zoho Desk:</strong> Limited use of helpdesk features, suggesting unaddressed customer support needs.</li>
+                    <li><strong style="font-weight: 600;">Zoho Analytics:</strong> Low adoption of reporting tools, leading to a lack of data-driven decision-making.</li>
                 </ul>
+                <hr style="border: 0; height: 1px; background-color: #eee; margin: 20px 0;">
 
-                <h3>Common Feedback & Trends</h3>
+                <h3><span class="churn-icon yellow">&#128227;</span> Common Feedback & Trends</h3>
                 <p>Based on exit surveys and account manager notes, common themes include:</p>
                 <ul class="suggestions-list">
-                    <li><strong>Feature Parity:</strong> Perception of competitors offering more specialized features (e.g., advanced marketing automation).</li>
-                    <li><strong>Onboarding Gaps:</strong> Initial setup challenges or lack of comprehensive training on integrated Zoho solutions.</li>
-                    <li><strong>Cost vs. Value:</strong> Some SMBs found advanced features overwhelming or not cost-effective for their specific needs.</li>
+                    <li><strong style="font-weight: 600;">Feature Parity:</strong> Perception of competitors offering more specialized features (e.g., advanced marketing automation).</li>
+                    <li><strong style="font-weight: 600;">Onboarding Gaps:</strong> Initial setup challenges or lack of comprehensive training on integrated Zoho solutions.</li>
+                    <li><strong style="font-weight: 600;">Cost vs. Value:</strong> Some SMBs found advanced features overwhelming or not cost-effective for their specific needs.</li>
                 </ul>
+                <hr style="border: 0; height: 1px; background-color: #eee; margin: 20px 0;">
 
-                <h3>Suggested Retention Strategies</h3>
+                <h3><span class="churn-icon blue">&#128161;</span> Suggested Retention Strategies</h3>
                 <ul class="suggestions-list">
-                    <li>Implement <strong>proactive health checks</strong> for accounts with low CRM/Books activity.</li>
-                    <li>Offer <strong>targeted feature adoption workshops</strong> for specific Zoho products like Desk or Analytics.</li>
-                    <li>Develop a <strong>personalized onboarding journey</strong> emphasizing cross-product integration.</li>
-                    <li>Engage "at-risk" accounts with <strong>exclusive webinars</strong> showcasing new Zoho features or success stories.</li>
+                    <li>Implement <strong style="font-weight: 600;">proactive health checks</strong> for accounts with low CRM/Books activity.</li>
+                    <li>Offer <strong style="font-weight: 600;">targeted feature adoption workshops</strong> for specific Zoho products like Desk or Analytics.</li>
+                    <li>Develop a <strong style="font-weight: 600;">personalized onboarding journey</strong> emphasizing cross-product integration.</li>
+                    <li>Engage "at-risk" accounts with <strong style="font-weight: 600;">exclusive webinars</strong> showcasing new Zoho features or success stories.</li>
                 </ul>
             </div>
             <div class="modal-footer" style="justify-content: center;">
