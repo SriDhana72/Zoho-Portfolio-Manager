@@ -871,7 +871,7 @@ function renderGmvConversionChart() {
             labels: gmvConversionData.labels,
             datasets: [
                 {
-                    label: 'GMV ($)',
+                    label: 'ARR ($)',
                     data: gmvConversionData.gmv,
                     backgroundColor: ['#5a9eff', '#007bff', '#5a9eff', '#007bff', '#5a9eff', '#007bff', '#5a9eff'], // Example colors
                     // Using a gradient for bars might look better but requires more complex setup for each bar
@@ -930,7 +930,7 @@ function renderGmvConversionChart() {
                     position: 'left',
                     title: {
                         display: true,
-                        text: 'GMV ($)'
+                        text: 'ARR ($)'
                     },
                     ticks: {
                         callback: function(value) {
