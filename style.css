@@ -1064,6 +1064,8 @@ body { /* Styles for the entire page body */
     border-color: #007bff; /* Blue border */
 }
 /* --- MODAL STYLES --- */
+/* --- Your existing styles for the overlay --- */
+/* --- Overlay and Container --- */
 .modal-overlay { /* Overlay for modals */
     display: none; /* Hidden by default */ 
     position: fixed; /* Stay in place */
@@ -1080,20 +1082,41 @@ body { /* Styles for the entire page body */
     align-items: center; /* Vertically center content */
     justify-content: center; /* Horizontally center content */
 }
-.modal-content { /* Content area for modals */
-    background-color: #fefefe; /* White background */
-    padding: 30px; /* Padding */
-    border-radius: 10px; /* Rounded corners */
-    box-shadow: 0 5px 20px rgba(0,0,0,0.2); /* Shadow */
-    width: 80%; /* Adjusted for smaller size */
-    max-width: 450px; /* Adjusted for smaller size */
-    position: relative; /* For close button positioning */
-    display: flex; /* Flexbox for internal layout */
-    flex-direction: column; /* Stack content vertically */
-    gap: 20px; /* Gap between elements */
-    overflow: auto; /* Enable scroll if content overflows */
-    max-height: 90vh; /* Limit height to prevent overflow on small screens */
+
+/* --- Core Modal Content --- */
+.modal-content {
+    background-color: #fefefe;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+    width: 80%;
+    max-width: 450px;
+    position: relative;
+    /* --- The magic sauce for scrolling --- */
+    display: flex; /* Enables flexbox layout */
+    flex-direction: column; /* Stacks header, body, footer vertically */
+    max-height: 90vh; /* Constrains the modal height to the viewport */
+    /* REMOVED: overflow: auto; from this container */
 }
+
+
+/* --- The SCROLLABLE Body --- */
+.modal-body {
+    flex-grow: 1; /* This is crucial. It allows the body to fill all available vertical space */
+    overflow-y: auto; /* Adds a vertical scrollbar ONLY to this element when its content overflows */
+    padding: 0 10px; /* Optional padding for the scrollable area */
+}
+
+/* --- Static Header and Footer --- */
+.modal-header {
+    flex-shrink: 0; /* Prevents the header from shrinking */
+    padding-bottom: 20px;
+}
+.modal-footer {
+    flex-shrink: 0; /* Prevents the footer from shrinking */
+    padding-top: 20px;
+}
+
 /* Make All Products modal smaller */
 #allProductsModal .modal-content {
     max-width: 400px; /* Smaller max-width */
