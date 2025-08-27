@@ -439,7 +439,7 @@ function renderTable() { // Renders the customer portfolio table
         `; // Populate last interaction column HTML
         row.appendChild(lastInteractionTd); // Append last interaction column to row
         const actionsTd = document.createElement('td'); // Create table data for actions column
-        actionsTd.innerHTML = `<a href="#" class="action-link">View</a>`; // Populate actions column HTML with link
+        actionsTd.innerHTML = `<a href="#" class="action-link" onclick="switchTab('merchant360'); return false;">View</a>`; // Populate actions column HTML with link
         row.appendChild(actionsTd); // Append actions column to row
         merchantTableBody.appendChild(row); // Append row to table body
         
