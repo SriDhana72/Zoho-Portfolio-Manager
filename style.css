@@ -947,6 +947,8 @@ body { /* Styles for the entire page body */
 .product-badge.pos { background-color: #fffbe6; color: #ffc107; } /* POS badge color */
 .product-badge.analytics { background-color: #e0f9fb; color: #17a2b8; } /* Analytics badge color */
 .product-badge.books { background-color: #ffe6e6; color: #dc3545; } /* Books badge color */
+
+
 .health-score-badge { /* Container for health score badge */
     display: flex; /* Flexbox for layout */
     align-items: center; /* Vertically align */
@@ -977,6 +979,7 @@ body { /* Styles for the entire page body */
 .health-score-text.good { color: #007bff; } /* Original Blue */
 .health-score-text.average { color: #ffc107; } /* Original Yellow */
 .health-score-text.poor { color: #dc3545; } /* Original Red */
+
 .status-badge { /* Status badge styling */
     display: inline-block; /* Display as inline block */
     padding: 4px 8px; /* Padding */

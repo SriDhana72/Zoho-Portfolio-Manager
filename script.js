@@ -413,7 +413,16 @@ function renderTable() { // Renders the customer portfolio table
             <span class="product-badge ${product.toLowerCase()}">${product}</span>
         `).join(''); // Populate products column HTML with badges
         row.appendChild(productsTd); // Append products column to row
-        
+        const healthScoreTd = document.createElement('td'); // Create table data for health score column
+        healthScoreTd.innerHTML = `
+            <div class="health-score-badge">
+                <div class="health-score-circle-small ${customer.healthColor}">
+                    ${customer.healthScore}
+                </div>
+                <span class="health-score-text ${customer.healthColor}">${customer.healthText}</span>
+            </div>
+        `; // Populate health score column HTML
+        row.appendChild(healthScoreTd); // Append health score column to row
         const statusTd = document.createElement('td'); // Create table data for status column
         const statusClass = customer.status.toLowerCase().replace(' ', '-'); // Determine class for status
         statusTd.innerHTML = `<span class="status-badge ${statusClass}">${customer.status}</span>`; // Populate status column HTML with badge
