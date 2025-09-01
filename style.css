@@ -90,7 +90,7 @@ body { /* Styles for the entire page body */
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08); /* Softer shadow */
     text-align: left; /* Align text to the left */
     width: auto; /* Allow content to dictate width */
-    max-width: 98%; /* Slightly wider for the new element */
+    max-width: 105%; /* Slightly wider for the new element */
     box-sizing: border-box; /* Include padding in width calculation */
     position: relative; /* For positioning purposes */
     top: 40px; /* Align to top */
