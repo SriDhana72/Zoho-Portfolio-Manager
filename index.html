@@ -21,12 +21,10 @@
     <div id="dashboard-content" class="widget-container">
         <div class="header-row">
             <div class="header-left">
-                <img src="img/zoho.png" alt="zoho Logo" width="100" height="40">
+                <img src="Zoho.png" alt="zoho Logo" width="100" height="40">
                 <span class="app-title">&nbsp;
                     Portfolio Intelligence</span>
                     <title>Refresh Icon</title>
-
-                    <!-- Refresh button -->
 <!-- Refresh button -->
 <button class="refresh-btn" onclick="handleRefresh(event)">
     <svg class="refresh-icon" viewBox="0 0 24 24">
@@ -83,9 +81,10 @@
             <span class="separator"></span>
             <span>Last updated : Today, 10:15 AM</span>
         </div>
-        <div class="cards-container">
+        <!-- BEGIN: Rewritten cards-container with a responsive grid layout -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-8">
             <!-- Card 1: Total ARR (MTD) - Now includes Active Accounts Details -->
-            <div class="card">
+            <div class="card bg-white rounded-lg shadow-md p-6">
                 <span class="card-percentage-change">+12.4%</span>
                 <div class="card-title text-black"><STRONG>Total ARR (MTD)</STRONG></div>
                 <div class="card-value">$42.8M</div>
@@ -107,7 +106,7 @@
                 </div>
             </div>
             <!-- Card 2: Upsell & Cross-sell (New Card) -->
-            <div class="card">
+            <div class="card bg-white rounded-lg shadow-md p-6">
                 <div class="card-header-with-filter">
                     <div class="card-title text-black"> <strong>Upsell & Cross-sell</strong></div>
                     <select class="card-filter-select" id="upsellCrossSellFilter">
@@ -154,7 +153,7 @@
                 </div>
             </div>
             <!-- Card 3: Product Adoption -->
-            <div class="card">
+            <div class="card bg-white rounded-lg shadow-md p-6">
                 <div class="card-title text-black"><strong>Product Adoption</strong></div> <!-- Direct title now -->
                 <span class="product-change">+5 this month</span> <!-- Keep this positioned absolutely -->
                 <div class="product-items-container" id="productAdoptionContainer">
@@ -165,7 +164,7 @@
                 </div>
             </div>
             <!-- Card 4: Portfolio Health -->
-            <div class="card">
+            <div class="card bg-white rounded-lg shadow-md p-6">
                 <div class="health-card-bg">
         <!-- Header Section -->
         <div class="flex justify-between items-center mb-6">
@@ -215,7 +214,7 @@
 
             </div>
             <!-- NEW Card 5: Churn Insights (MTD) - Now dynamic with filter -->
-            <div class="card">
+            <div class="card bg-white rounded-lg shadow-md p-6">
                 <div class="card-header-with-filter">
                     <div class="card-title text-black"><strong>Churn Insights</strong></div>
                     <select class="card-filter-select" id="churnFilter">
@@ -245,10 +244,12 @@
                 <button class="churn-action-button" id="analyzeChurnBtn">Analyze Churned Accounts</button>
             </div>
         </div>
-        <!-- Charts Section Wrapper -->
-        <div class="charts-section-wrapper">
+        <!-- END: Rewritten cards-container -->
+        
+        <!-- Charts Section Wrapper - Rewritten to be a responsive grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
             <!-- ARR Trend Graphs Container -->
-            <div class="arr-trend-section">
+            <div class="bg-white rounded-lg shadow-md p-6">
                 <div class="arr-trend-header">
                     <h2 class="text-gray-800 font-bold" style="font-size:1.0em;">ARR Trend Comparison</h2>
                     <select class="arr-trend-dropdown" id="arrTrendFilter">
@@ -263,7 +264,7 @@
                 </div>
             </div>
             <!-- NEW: Combination Chart (GMV & Conversion Rate) Section -->
-            <div class="gmv-by-industry-section">
+            <div class="bg-white rounded-lg shadow-md p-6">
                 <div class="gmv-header">
                     <h2 class="text-gray-800 font-bold" style="font-size:1.0em;">Industry wise (ARR     
                         & Conversion Rate)</h2>
@@ -281,6 +282,7 @@
                 </div>
             </div>
         </div>
+        
         <!-- NEW Section: Customer Portfolio Table -->
         <div class="customer-portfolio-section">
             <div class="customer-portfolio-header">
@@ -517,10 +519,10 @@
                 </div>
             </div>
         </div>
-        <!-- NEW: Container for Action Items, Growth Opportunities, and At-Risk Merchants to display side-by-side -->
-        <div class="side-by-side-sections">
+        <!-- BEGIN: Rewritten side-by-side-sections with a responsive grid layout -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
             <!-- Action Items Section -->
-            <div class="action-items-section">
+            <div class="action-items-section bg-white rounded-lg shadow-md p-6">
                 <div class="action-items-header">
                     <h2 class="text-gray-800 font-bold" style="font-size:1.0em;">Action Items</h2>
                     <span class="pending-badge">3 pending</span>
@@ -558,60 +560,60 @@
             </div>
             <!-- Growth Opportunities Section -->
             
-<div class="growth-opportunities-section">
-    <div class="growth-opportunities-header">
-        <div class="growth-opportunities-header-content">
-            <h2 class="text-gray-800 font-bold" style="font-size:1.0em;">Growth Opportunities</h2>
-            <select class="card-filter-select" id="growthOpportunityFilter">
-                <option value="upsell">Upsell</option>
-                <option value="cross-sell">Cross-sell &nbsp;
-                </option>
-            </select>
-        </div>
-        <span class="identified-badge" id="growthOpportunitiesBadge">3 identified</span>
-    </div>
-    <div class="opportunities-grid" id="opportunitiesGrid"><div class="opportunity-card">
-        <div class="opportunity-content">
-            <div class="opportunity-title">CRM Advanced Feature Upsell</div>
-            <div class="opportunity-description">Offer advanced CRM features like SalesIQ and workflow automation to 20 clients.</div>
-            <div class="opportunity-progress-bar-container">
-                <div class="opportunity-progress-bar-fill" style="width: 40%;"></div>
+            <div class="growth-opportunities-section bg-white rounded-lg shadow-md p-6">
+                <div class="growth-opportunities-header">
+                    <div class="growth-opportunities-header-content">
+                        <h2 class="text-gray-800 font-bold" style="font-size:1.0em;">Growth Opportunities</h2>
+                        <select class="card-filter-select" id="growthOpportunityFilter">
+                            <option value="upsell">Upsell</option>
+                            <option value="cross-sell">Cross-sell &nbsp;
+                            </option>
+                        </select>
+                    </div>
+                    <span class="identified-badge" id="growthOpportunitiesBadge">3 identified</span>
+                </div>
+                <div class="opportunities-grid" id="opportunitiesGrid"><div class="opportunity-card">
+                    <div class="opportunity-content">
+                        <div class="opportunity-title">CRM Advanced Feature Upsell</div>
+                        <div class="opportunity-description">Offer advanced CRM features like SalesIQ and workflow automation to 20 clients.</div>
+                        <div class="opportunity-progress-bar-container">
+                            <div class="opportunity-progress-bar-fill" style="width: 40%;"></div>
+                        </div>
+                        <div class="opportunity-stats">
+                            <span>20/50 clients</span>
+                            <span class="value">$150K opportunity</span>
+                        </div>
+                    </div>
+                </div><div class="opportunity-card">
+                    <div class="opportunity-content">
+                        <div class="opportunity-title">Zoho One Suite Upgrade</div>
+                        <div class="opportunity-description">Propose Zoho One to 10 clients currently using 3+ individual Zoho apps.</div>
+                        <div class="opportunity-progress-bar-container">
+                            <div class="opportunity-progress-bar-fill" style="width: 20%;"></div>
+                        </div>
+                        <div class="opportunity-stats">
+                            <span>10/50 clients</span>
+                            <span class="value">$250K opportunity</span>
+                        </div>
+                    </div>
+                </div><div class="opportunity-card">
+                    <div class="opportunity-content">
+                        <div class="opportunity-title">Analytics Premium Plan</div>
+                        <div class="opportunity-description">Target 15 clients for an upgrade to Zoho Analytics Premium features.</div>
+                        <div class="opportunity-progress-bar-container">
+                            <div class="opportunity-progress-bar-fill" style="width: 30%;"></div>
+                        </div>
+                        <div class="opportunity-stats">
+                            <span>15/50 clients</span>
+                            <span class="value">$80K opportunity</span>
+                        </div>
+                    </div>
+                </div></div>
+                <a href="#" class="view-all-link">View All Opportunities</a>
             </div>
-            <div class="opportunity-stats">
-                <span>20/50 clients</span>
-                <span class="value">$150K opportunity</span>
-            </div>
-        </div>
-    </div><div class="opportunity-card">
-        <div class="opportunity-content">
-            <div class="opportunity-title">Zoho One Suite Upgrade</div>
-            <div class="opportunity-description">Propose Zoho One to 10 clients currently using 3+ individual Zoho apps.</div>
-            <div class="opportunity-progress-bar-container">
-                <div class="opportunity-progress-bar-fill" style="width: 20%;"></div>
-            </div>
-            <div class="opportunity-stats">
-                <span>10/50 clients</span>
-                <span class="value">$250K opportunity</span>
-            </div>
-        </div>
-    </div><div class="opportunity-card">
-        <div class="opportunity-content">
-            <div class="opportunity-title">Analytics Premium Plan</div>
-            <div class="opportunity-description">Target 15 clients for an upgrade to Zoho Analytics Premium features.</div>
-            <div class="opportunity-progress-bar-container">
-                <div class="opportunity-progress-bar-fill" style="width: 30%;"></div>
-            </div>
-            <div class="opportunity-stats">
-                <span>15/50 clients</span>
-                <span class="value">$80K opportunity</span>
-            </div>
-        </div>
-    </div></div>
-    <a href="#" class="view-all-link">View All Opportunities</a>
-</div>
 
             <!-- NEW: At-Risk Merchants Section (Zoho Business Focus) -->
-            <div class="at-risk-merchants-section">
+            <div class="at-risk-merchants-section bg-white rounded-lg shadow-md p-6">
                 <div class="at-risk-merchants-header">
                     <h2 class="text-gray-800 font-bold" style="font-size:1.0em;">At-Risk Accounts</h2>
                     <span class="merchants-badge">4 accounts</span>
@@ -659,6 +661,7 @@
                 <a href="#" class="view-all-link">View All At-Risk Accounts</a>
             </div>
         </div>
+        <!-- END: Rewritten side-by-side-sections -->
     </div>
     <!-- Merchant 360 Content (Initially hidden) -->
      <div id="merchant-360-content" class="widget-container-bg" frameborder="0">
@@ -813,4 +816,3 @@
     <script src="script.js"></script>
 </body>
 </html>
-
